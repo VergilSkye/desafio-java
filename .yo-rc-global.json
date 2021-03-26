@@ -1,0 +1,8 @@
+{
+  "generator-jhipster:7.0.0": {
+    "promptValues": {
+      "packageName": "dev.vergil",
+      "nativeLanguage": "en"
+    }
+  }
+}

@@ -36,11 +36,13 @@
     "withAdminUi": true,
     "clientTheme": "none",
     "enableTranslation": true,
-    "nativeLanguage": "en",
+    "nativeLanguage": "pt-br",
     "packageFolder": "dev/vergil",
     "jwtSecretKey": "ZDAwYjE2NTY4YTcyMTdjZTRlODQ4M2YwYmE4OWVmNzc1YmJkYTlhYzEyMmZiOTQ1NDJmM2U3MzdjMGMzMTliMTVhMjEzMTFkNWE0MWZkZTUyMDQyM2M4NDlmZDhmY2FmNzU4NDM4NDNhN2M5NWFkM2RlZjBjOTY4ZWVjMjNmZDU=",
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["en", "pt-pt"]
+    "languages": ["pt-br", "en"],
+    "entities": ["Pessoa"],
+    "lastLiquibaseTimestamp": 1616759375000
   }
 }

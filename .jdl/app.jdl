@@ -1,0 +1,30 @@
+/**
+ * The Pessoa entity.
+ * @author Virgílio Stefanin
+ */
+entity Pessoa {
+    /** Nome obrigatorio */
+    nome String required
+    /** Sexo enum com tres opcoes, Masculino, Feminino, Outros **/ 
+    sexo TipoSexo
+    /** Email nao obrigatorio */
+    email String
+    /** Data de nascimento obrigatoria */
+    dataNascimento LocalDate required
+    /** Naturalidade não obrigatória */
+    naturalidade String
+    /** Nacionalidade não obrigatória */
+    nacionaliade String
+    cpf String required unique
+
+}
+
+enum TipoSexo {
+    MASCULINO, FEMININO, OUTROS
+}
+
+service * with serviceClass
+dto * with mapstruct
+paginate * with pagination
+
+

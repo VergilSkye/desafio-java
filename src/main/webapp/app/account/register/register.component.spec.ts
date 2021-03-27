@@ -48,7 +48,7 @@ describe('Component Tests', () => {
       [RegisterService, TranslateService],
       fakeAsync((service: RegisterService, mockLanguageService: TranslateService) => {
         spyOn(service, 'save').and.returnValue(of({}));
-        mockLanguageService.currentLang = 'en';
+        mockLanguageService.currentLang = 'pt-br';
         comp.registerForm.patchValue({
           password: 'password',
           confirmPassword: 'password',
@@ -61,7 +61,7 @@ describe('Component Tests', () => {
           email: '',
           password: 'password',
           login: '',
-          langKey: 'en',
+          langKey: 'pt-br',
         });
         expect(comp.success).toBe(true);
         expect(comp.errorUserExists).toBe(false);

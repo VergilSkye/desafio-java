@@ -71,7 +71,7 @@ export class CustomCPFCNPJValidatorService {
    */
 
   existingCpfValidator(pessoaService: PessoaService, pessoaId: number): AsyncValidatorFn {
-    return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> =>
+    return (control: AbstractControl): Observable<ValidationErrors | null> =>
       pessoaService
         .findWithCpf(control.value, pessoaId)
         .pipe(map(res => (control.value && res.body && res.body > 0 ? { cpfAlreadyInUse: { value: control.value } } : null)));

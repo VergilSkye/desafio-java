@@ -50,9 +50,9 @@ export class PessoaService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  findWithCpf(rawCPF: any, pessoaId: number): Observable<HttpResponse<number>> {
-    const cpf = rawCPF.value.replace(/\D/g, ''); // retirar mascara do cpf
-    const options = createRequestOption({ cpf, id: pessoaId });
+  findWithCpf(rawCPF: string, id: number): Observable<HttpResponse<number>> {
+    const cpf = rawCPF.replace(/\D/g, ''); // retirar mascara do cpf
+    const options = createRequestOption({ cpf, id });
     return this.http // retorna 1 ou 0 para o numero de cpf utilizados,
       .get<number>(`${this.resourceUrl}/cpf`, { params: options, observe: 'response' });
   }

@@ -28,12 +28,15 @@ export class PessoaUpdateComponent implements OnInit {
     nacionaliade: [],
     cpf: [
       null,
-      [
-        Validators.required,
-        Validators.pattern('^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}$'),
-        this.customCPFCNPJValidatorService.isValidCpf(),
-      ],
-      [this.customCPFCNPJValidatorService.existingCpfValidator(this.pessoaService, this.pessoaId)],
+      {
+        validators: [
+          Validators.required,
+          Validators.pattern('^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}$'),
+          this.customCPFCNPJValidatorService.isValidCpf(),
+        ],
+        asyncValidators: [this.customCPFCNPJValidatorService.existingCpfValidator(this.pessoaService, this.pessoaId)],
+        updateOn: 'blur',
+      },
     ],
   });
 

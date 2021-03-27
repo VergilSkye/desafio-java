@@ -22,7 +22,7 @@ describe('Component Tests', () => {
       lastName: 'Doe',
       activated: true,
       email: 'john.doe@mail.com',
-      langKey: 'en',
+      langKey: 'pt-br',
       login: 'john',
       authorities: [],
       imageUrl: '',
@@ -55,7 +55,7 @@ describe('Component Tests', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'john.doe@mail.com',
-        langKey: 'en',
+        langKey: 'pt-br',
       };
 
       // WHEN

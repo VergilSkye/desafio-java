@@ -1,0 +1,181 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pessoa-heading" data-cy="PessoaCreateUpdateHeading" jhiTranslate="pessoaApp.pessoa.home.createOrEditLabel">
+        Create or edit a Pessoa
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="pessoaApp.pessoa.nome"
+            for="field_nome"
+            [ngbTooltip]="'pessoaApp.pessoa.help.nome' | translate"
+            >Nome</label
+          >
+          <input type="text" class="form-control" name="nome" id="field_nome" data-cy="nome" formControlName="nome" />
+          <div *ngIf="editForm.get('nome')!.invalid && (editForm.get('nome')!.dirty || editForm.get('nome')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nome')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="pessoaApp.pessoa.sexo"
+            for="field_sexo"
+            [ngbTooltip]="'pessoaApp.pessoa.help.sexo' | translate"
+            >Sexo</label
+          >
+          <select class="form-control" name="sexo" formControlName="sexo" id="field_sexo" data-cy="sexo">
+            <option [ngValue]="null">{{ 'pessoaApp.TipoSexo.null' | translate }}</option>
+            <option value="MASCULINO">{{ 'pessoaApp.TipoSexo.MASCULINO' | translate }}</option>
+            <option value="FEMININO">{{ 'pessoaApp.TipoSexo.FEMININO' | translate }}</option>
+            <option value="OUTROS">{{ 'pessoaApp.TipoSexo.OUTROS' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="pessoaApp.pessoa.email"
+            for="field_email"
+            [ngbTooltip]="'pessoaApp.pessoa.help.email' | translate"
+            >Email</label
+          >
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="pessoaApp.pessoa.dataNascimento"
+            for="field_dataNascimento"
+            [ngbTooltip]="'pessoaApp.pessoa.help.dataNascimento' | translate"
+            >Data Nascimento</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dataNascimento"
+              data-cy="dataNascimento"
+              type="text"
+              class="form-control"
+              name="dataNascimento"
+              ngbDatepicker
+              #dataNascimentoDp="ngbDatepicker"
+              formControlName="dataNascimento"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataNascimentoDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          <div
+            *ngIf="
+              editForm.get('dataNascimento')!.invalid && (editForm.get('dataNascimento')!.dirty || editForm.get('dataNascimento')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dataNascimento')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="pessoaApp.pessoa.naturalidade"
+            for="field_naturalidade"
+            [ngbTooltip]="'pessoaApp.pessoa.help.naturalidade' | translate"
+            >Naturalidade</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="naturalidade"
+            id="field_naturalidade"
+            data-cy="naturalidade"
+            formControlName="naturalidade"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="pessoaApp.pessoa.nacionaliade"
+            for="field_nacionaliade"
+            [ngbTooltip]="'pessoaApp.pessoa.help.nacionaliade' | translate"
+            >Nacionaliade</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="nacionaliade"
+            id="field_nacionaliade"
+            data-cy="nacionaliade"
+            formControlName="nacionaliade"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="pessoaApp.pessoa.cpf" for="field_cpf">Cpf</label>
+          <input type="text" class="form-control" name="cpf" id="field_cpf" data-cy="cpf" formControlName="cpf" />
+          <div *ngIf="editForm.get('cpf')!.invalid && (editForm.get('cpf')!.dirty || editForm.get('cpf')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('cpf')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('cpf')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'CPF' }"
+            >
+              This field should follow pattern for "CPF".
+            </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('cpf')?.errors?.cpfNotValid" jhiTranslate="entity.validation.cpfdigit">
+              Invalid CPF Number.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('cpf')?.errors?.cpfAlreadyInUse"
+              jhiTranslate="entity.validation.cpfAlreadyInUse"
+            >
+              CPF já está em uso.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

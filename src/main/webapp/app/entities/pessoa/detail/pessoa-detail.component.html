@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pessoa">
+      <h2 data-cy="pessoaDetailsHeading"><span jhiTranslate="pessoaApp.pessoa.detail.title">Pessoa</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ pessoa.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="pessoaApp.pessoa.nome" [ngbTooltip]="'pessoaApp.pessoa.help.nome' | translate">Nome</span></dt>
+        <dd>
+          <span>{{ pessoa.nome }}</span>
+        </dd>
+        <dt><span jhiTranslate="pessoaApp.pessoa.sexo" [ngbTooltip]="'pessoaApp.pessoa.help.sexo' | translate">Sexo</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'pessoaApp.TipoSexo.' + pessoa.sexo }}">{{ pessoa.sexo }}</span>
+        </dd>
+        <dt><span jhiTranslate="pessoaApp.pessoa.email" [ngbTooltip]="'pessoaApp.pessoa.help.email' | translate">Email</span></dt>
+        <dd>
+          <span>{{ pessoa.email }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="pessoaApp.pessoa.dataNascimento" [ngbTooltip]="'pessoaApp.pessoa.help.dataNascimento' | translate"
+            >Data Nascimento</span
+          >
+        </dt>
+        <dd>
+          <span>{{ pessoa.dataNascimento | formatMediumDate }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="pessoaApp.pessoa.naturalidade" [ngbTooltip]="'pessoaApp.pessoa.help.naturalidade' | translate"
+            >Naturalidade</span
+          >
+        </dt>
+        <dd>
+          <span>{{ pessoa.naturalidade }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="pessoaApp.pessoa.nacionaliade" [ngbTooltip]="'pessoaApp.pessoa.help.nacionaliade' | translate"
+            >Nacionaliade</span
+          >
+        </dt>
+        <dd>
+          <span>{{ pessoa.nacionaliade }}</span>
+        </dd>
+        <dt><span jhiTranslate="pessoaApp.pessoa.cpf">Cpf</span></dt>
+        <dd>
+          <span>{{ pessoa.cpf }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pessoa', pessoa.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

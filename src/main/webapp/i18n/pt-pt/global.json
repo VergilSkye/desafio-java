@@ -1,12 +1,14 @@
 {
   "global": {
-    "title": "Pessoa",
+    "title": "Desafio Tecnico Java",
     "browsehappy": "Está a usar um navegador <strong>desatualizado</strong>. Por favor <a href=\"http://browsehappy.com/?locale=pt_PT\">atualize o seu navegador</a> para ter uma experiência melhor.",
     "menu": {
       "home": "Início",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
-        "main": "Entidades",
+        "main": "Recursos",
+        "pessoa": "Pessoa",
+        "chat": "chat",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -116,7 +118,9 @@
       "maxbytes": "Este campo não pode ter mais que {{max}} bytes.",
       "pattern": "Este campo deve estar dentro do seguinte padrão {{pattern}}.",
       "number": "Este campo é do tipo número.",
-      "datetimelocal": "Este campo é do tipo data/hora."
+      "datetimelocal": "Este campo é do tipo data/hora.",
+      "cpfdigit": "Digito do CPF é inválido",
+      "cpfAlreadyInUse": "CPF já está em uso por outra pessoa"
     }
   },
   "error": {
@@ -136,5 +140,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "Este é o seu rodapé"
+  "footer": "Criado por Virgílio Stefanin "
 }

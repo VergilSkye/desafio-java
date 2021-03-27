@@ -1,0 +1,38 @@
+{
+  "pessoaApp": {
+    "pessoa": {
+      "home": {
+        "title": "Pessoas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Pessoa",
+        "createOrEditLabel": "Create or edit a Pessoa",
+        "notFound": "No Pessoas found"
+      },
+      "created": "A new Pessoa is created with identifier {{ param }}",
+      "updated": "A Pessoa is updated with identifier {{ param }}",
+      "deleted": "A Pessoa is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pessoa {{ id }}?"
+      },
+      "detail": {
+        "title": "Pessoa"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "sexo": "Sexo",
+      "email": "Email",
+      "dataNascimento": "Data Nascimento",
+      "naturalidade": "Naturalidade",
+      "nacionaliade": "Nacionaliade",
+      "cpf": "Cpf",
+      "help": {
+        "nome": "Nome obrigatorio",
+        "sexo": "Sexo enum com tres opcoes, Masculino, Feminino, Outros",
+        "email": "Email nao obrigatorio",
+        "dataNascimento": "Data de nascimento obrigatoria",
+        "naturalidade": "Naturalidade não obrigatória",
+        "nacionaliade": "Nacionalidade não obrigatória"
+      }
+    }
+  }
+}

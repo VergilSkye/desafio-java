@@ -4,25 +4,11 @@ services:
   pessoa-app:
     image: pessoa
     environment:
-      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - _JAVA_OPTIONS=-Xmx1024m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://pessoa-postgresql:5432/pessoa
-      - SPRING_LIQUIBASE_URL=jdbc:postgresql://pessoa-postgresql:5432/pessoa
-      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      # - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:
       - 127.0.0.1:8080:8080
-  pessoa-postgresql:
-    image: postgres:13.2
-    # volumes:
-    #   - ~/volumes/jhipster/pessoa/postgresql/:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=pessoa
-      - POSTGRES_PASSWORD=
-      - POSTGRES_HOST_AUTH_METHOD=trust
-    # If you want to expose these ports outside your dev PC,
-    # remove the "127.0.0.1:" prefix
-    ports:
-      - 127.0.0.1:5432:5432

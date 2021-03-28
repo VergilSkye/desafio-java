@@ -1,0 +1,40 @@
+{
+  "pessoaApp": {
+    "chat": {
+      "home": {
+        "title": "Chats",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Chat",
+        "createOrEditLabel": "Create or edit a Chat",
+        "notFound": "No Chats found"
+      },
+      "created": "A new Chat is created with identifier {{ param }}",
+      "updated": "A Chat is updated with identifier {{ param }}",
+      "deleted": "A Chat is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Chat {{ id }}?"
+      },
+      "detail": {
+        "title": "Chat"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "sexo": "Sexo",
+      "email": "Email",
+      "dataNascimento": "Data Nascimento",
+      "naturalidade": "Naturalidade",
+      "nacionalidade": "Nacionalidade",
+      "cpf": "Cpf",
+      "createdDate": "Created date",
+      "lastModifiedDate": "Modified date",
+      "help": {
+        "nome": "Nome obrigatorio",
+        "sexo": "Sexo enum com tres opcoes, Masculino, Feminino, Outros",
+        "email": "Email nao obrigatorio",
+        "dataNascimento": "Data de nascimento obrigatoria",
+        "naturalidade": "Naturalidade não obrigatória",
+        "nacionalidade": "Nacionalidade não obrigatória"
+      }
+    }
+  }
+}

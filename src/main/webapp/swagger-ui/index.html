@@ -60,7 +60,9 @@
             requestInterceptor: function (req) {
               var authToken = localStorage.getItem('jhi-authenticationToken') || sessionStorage.getItem('jhi-authenticationToken');
               if (authToken) {
+                console.log(authToken);
                 authToken = JSON.parse(authToken);
+                console.log(authToken);
                 req.headers['Authorization'] = 'Bearer ' + authToken;
               }
               // Remove the sample Swagger UI request body if present

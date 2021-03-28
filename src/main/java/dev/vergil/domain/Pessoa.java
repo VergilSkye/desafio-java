@@ -61,8 +61,8 @@ public class Pessoa implements Serializable {
     /**
      * Nacionalidade não obrigatória
      */
-    @Column(name = "nacionaliade")
-    private String nacionaliade;
+    @Column(name = "nacionalidade")
+    private String nacionalidade;
 
     @CPF
     @NotNull
@@ -148,17 +148,17 @@ public class Pessoa implements Serializable {
         this.naturalidade = naturalidade;
     }
 
-    public String getNacionaliade() {
-        return this.nacionaliade;
+    public String getNacionalidade() {
+        return this.nacionalidade;
     }
 
-    public Pessoa nacionaliade(String nacionaliade) {
-        this.nacionaliade = nacionaliade;
+    public Pessoa nacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
         return this;
     }
 
-    public void setNacionaliade(String nacionaliade) {
-        this.nacionaliade = nacionaliade;
+    public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
     }
 
     public String getCpf() {
@@ -203,7 +203,7 @@ public class Pessoa implements Serializable {
             ", email='" + getEmail() + "'" +
             ", dataNascimento='" + getDataNascimento() + "'" +
             ", naturalidade='" + getNaturalidade() + "'" +
-            ", nacionaliade='" + getNacionaliade() + "'" +
+            ", nacionalidade='" + getNacionalidade() + "'" +
             ", cpf='" + getCpf() + "'" +
             "}";
     }

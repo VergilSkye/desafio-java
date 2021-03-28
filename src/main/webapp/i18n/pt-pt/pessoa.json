@@ -23,7 +23,7 @@
       "email": "Email",
       "dataNascimento": "Data Nascimento",
       "naturalidade": "Naturalidade",
-      "nacionaliade": "Nacionaliade",
+      "nacionalidade": "Nacionalidade",
       "cpf": "Cpf",
       "help": {
         "nome": "Nome obrigatorio",
@@ -31,7 +31,7 @@
         "email": "Email nao obrigatorio",
         "dataNascimento": "Data de nascimento obrigatoria",
         "naturalidade": "Naturalidade não obrigatória",
-        "nacionaliade": "Nacionalidade não obrigatória"
+        "nacionalidade": "Nacionalidade não obrigatória"
       }
     }
   }

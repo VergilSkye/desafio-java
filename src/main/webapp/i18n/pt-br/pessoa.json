@@ -23,15 +23,16 @@
       "email": "Email",
       "dataNascimento": "Data Nascimento",
       "naturalidade": "Naturalidade",
-      "nacionaliade": "Nacionaliade",
+      "nacionalidade": "Nacionalidade",
       "cpf": "Cpf",
+      "CPF": "CPF",
       "help": {
         "nome": "Nome obrigatorio",
         "sexo": "Sexo enum com tres opcoes, Masculino, Feminino, Outros",
         "email": "Email nao obrigatorio",
         "dataNascimento": "Data de nascimento obrigatoria",
         "naturalidade": "Naturalidade não obrigatória",
-        "nacionaliade": "Nacionalidade não obrigatória"
+        "nacionalidade": "Nacionalidade não obrigatória"
       }
     }
   }

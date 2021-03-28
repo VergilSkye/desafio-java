@@ -14,7 +14,7 @@ entity Pessoa {
     /** Naturalidade não obrigatória */
     naturalidade String
     /** Nacionalidade não obrigatória */
-    nacionaliade String
+    nacionalidade String
     cpf String required unique
 
 }

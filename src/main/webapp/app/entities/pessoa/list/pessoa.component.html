@@ -42,10 +42,10 @@
           <th scope="col" jhiSortBy="naturalidade">
             <span jhiTranslate="pessoaApp.pessoa.naturalidade">Naturalidade</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="nacionaliade">
-            <span jhiTranslate="pessoaApp.pessoa.nacionaliade">Nacionaliade</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="nacionalidade">
+            <span jhiTranslate="pessoaApp.pessoa.nacionalidade">Nacionalidade</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="cpf"><span jhiTranslate="pessoaApp.pessoa.cpf">Cpf</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="cpf"><span jhiTranslate="pessoaApp.pessoa.CPF">CPF</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -59,8 +59,8 @@
           <td>{{ pessoa.email }}</td>
           <td>{{ pessoa.dataNascimento | formatMediumDate }}</td>
           <td>{{ pessoa.naturalidade }}</td>
-          <td>{{ pessoa.nacionaliade }}</td>
-          <td>{{ pessoa.cpf }}</td>
+          <td>{{ pessoa.nacionalidade }}</td>
+          <td>{{ pessoa.cpf! | mask: '000.000.000-00' }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/pessoa', pessoa.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

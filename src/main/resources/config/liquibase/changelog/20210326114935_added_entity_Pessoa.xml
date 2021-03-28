@@ -29,7 +29,7 @@
             <column name="naturalidade" type="varchar(255)" remarks="Naturalidade não obrigatória">
                 <constraints nullable="true" />
             </column>
-            <column name="nacionaliade" type="varchar(255)" remarks="Nacionalidade não obrigatória">
+            <column name="nacionalidade" type="varchar(255)" remarks="Nacionalidade não obrigatória">
                 <constraints nullable="true" />
             </column>
             <column name="cpf" type="varchar(255)">
@@ -60,7 +60,7 @@
             <column name="email" type="string"/>
             <column name="data_nascimento" type="date"/>
             <column name="naturalidade" type="string"/>
-            <column name="nacionaliade" type="string"/>
+            <column name="nacionalidade" type="string"/>
             <column name="cpf" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

@@ -32,7 +32,7 @@ describe('Service Tests', () => {
         email: 'AAAAAAA',
         dataNascimento: currentDate,
         naturalidade: 'AAAAAAA',
-        nacionaliade: 'AAAAAAA',
+        nacionalidade: 'AAAAAAA',
         cpf: 'AAAAAAA',
       };
     });
@@ -85,7 +85,7 @@ describe('Service Tests', () => {
             email: 'BBBBBB',
             dataNascimento: currentDate.format(DATE_FORMAT),
             naturalidade: 'BBBBBB',
-            nacionaliade: 'BBBBBB',
+            nacionalidade: 'BBBBBB',
             cpf: 'BBBBBB',
           },
           elemDefault
@@ -114,7 +114,7 @@ describe('Service Tests', () => {
             email: 'BBBBBB',
             dataNascimento: currentDate.format(DATE_FORMAT),
             naturalidade: 'BBBBBB',
-            nacionaliade: 'BBBBBB',
+            nacionalidade: 'BBBBBB',
             cpf: 'BBBBBB',
           },
           elemDefault

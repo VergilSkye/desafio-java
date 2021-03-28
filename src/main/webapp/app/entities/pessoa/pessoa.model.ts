@@ -8,7 +8,7 @@ export interface IPessoa {
   email?: string | null;
   dataNascimento?: dayjs.Dayjs;
   naturalidade?: string | null;
-  nacionaliade?: string | null;
+  nacionalidade?: string | null;
   cpf?: string;
 }
 
@@ -20,7 +20,7 @@ export class Pessoa implements IPessoa {
     public email?: string | null,
     public dataNascimento?: dayjs.Dayjs,
     public naturalidade?: string | null,
-    public nacionaliade?: string | null,
+    public nacionalidade?: string | null,
     public cpf?: string
   ) {}
 }

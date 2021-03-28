@@ -25,7 +25,7 @@ export class PessoaUpdateComponent implements OnInit {
     email: [],
     dataNascimento: [null, [Validators.required]],
     naturalidade: [],
-    nacionaliade: [],
+    nacionalidade: [],
     cpf: [
       null,
       {
@@ -91,7 +91,7 @@ export class PessoaUpdateComponent implements OnInit {
       email: pessoa.email,
       dataNascimento: pessoa.dataNascimento,
       naturalidade: pessoa.naturalidade,
-      nacionaliade: pessoa.nacionaliade,
+      nacionalidade: pessoa.nacionalidade,
       cpf: pessoa.cpf,
     });
   }
@@ -105,7 +105,7 @@ export class PessoaUpdateComponent implements OnInit {
       email: this.editForm.get(['email'])!.value,
       dataNascimento: this.editForm.get(['dataNascimento'])!.value,
       naturalidade: this.editForm.get(['naturalidade'])!.value,
-      nacionaliade: this.editForm.get(['nacionaliade'])!.value,
+      nacionalidade: this.editForm.get(['nacionalidade'])!.value,
       cpf: this.editForm.get(['cpf'])!.value,
     };
   }

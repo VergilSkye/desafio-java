@@ -88,7 +88,7 @@ class PessoaResourceIT {
             .email(DEFAULT_EMAIL)
             .dataNascimento(DEFAULT_DATA_NASCIMENTO)
             .naturalidade(DEFAULT_NATURALIDADE)
-            .nacionaliade(DEFAULT_NACIONALIADE)
+            .nacionalidade(DEFAULT_NACIONALIADE)
             .cpf(DEFAULT_CPF);
         return pessoa;
     }
@@ -106,7 +106,7 @@ class PessoaResourceIT {
             .email(UPDATED_EMAIL)
             .dataNascimento(UPDATED_DATA_NASCIMENTO)
             .naturalidade(UPDATED_NATURALIDADE)
-            .nacionaliade(UPDATED_NACIONALIADE)
+            .nacionalidade(UPDATED_NACIONALIADE)
             .cpf(UPDATED_CPF);
         return pessoa;
     }
@@ -135,7 +135,7 @@ class PessoaResourceIT {
         assertThat(testPessoa.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testPessoa.getDataNascimento()).isEqualTo(DEFAULT_DATA_NASCIMENTO);
         assertThat(testPessoa.getNaturalidade()).isEqualTo(DEFAULT_NATURALIDADE);
-        assertThat(testPessoa.getNacionaliade()).isEqualTo(DEFAULT_NACIONALIADE);
+        assertThat(testPessoa.getNacionalidade()).isEqualTo(DEFAULT_NACIONALIADE);
         assertThat(testPessoa.getCpf()).isEqualTo(DEFAULT_CPF);
     }
 
@@ -229,7 +229,7 @@ class PessoaResourceIT {
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].dataNascimento").value(hasItem(DEFAULT_DATA_NASCIMENTO.toString())))
             .andExpect(jsonPath("$.[*].naturalidade").value(hasItem(DEFAULT_NATURALIDADE)))
-            .andExpect(jsonPath("$.[*].nacionaliade").value(hasItem(DEFAULT_NACIONALIADE)))
+            .andExpect(jsonPath("$.[*].nacionalidade").value(hasItem(DEFAULT_NACIONALIADE)))
             .andExpect(jsonPath("$.[*].cpf").value(hasItem(DEFAULT_CPF)));
     }
 
@@ -250,7 +250,7 @@ class PessoaResourceIT {
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.dataNascimento").value(DEFAULT_DATA_NASCIMENTO.toString()))
             .andExpect(jsonPath("$.naturalidade").value(DEFAULT_NATURALIDADE))
-            .andExpect(jsonPath("$.nacionaliade").value(DEFAULT_NACIONALIADE))
+            .andExpect(jsonPath("$.nacionalidade").value(DEFAULT_NACIONALIADE))
             .andExpect(jsonPath("$.cpf").value(DEFAULT_CPF));
     }
 
@@ -279,7 +279,7 @@ class PessoaResourceIT {
             .email(UPDATED_EMAIL)
             .dataNascimento(UPDATED_DATA_NASCIMENTO)
             .naturalidade(UPDATED_NATURALIDADE)
-            .nacionaliade(UPDATED_NACIONALIADE)
+            .nacionalidade(UPDATED_NACIONALIADE)
             .cpf(UPDATED_CPF);
         PessoaDTO pessoaDTO = pessoaMapper.toDto(updatedPessoa);
 
@@ -300,7 +300,7 @@ class PessoaResourceIT {
         assertThat(testPessoa.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testPessoa.getDataNascimento()).isEqualTo(UPDATED_DATA_NASCIMENTO);
         assertThat(testPessoa.getNaturalidade()).isEqualTo(UPDATED_NATURALIDADE);
-        assertThat(testPessoa.getNacionaliade()).isEqualTo(UPDATED_NACIONALIADE);
+        assertThat(testPessoa.getNacionalidade()).isEqualTo(UPDATED_NACIONALIADE);
         assertThat(testPessoa.getCpf()).isEqualTo(UPDATED_CPF);
     }
 

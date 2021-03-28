@@ -30,7 +30,7 @@
       "javadoc": "Naturalidade não obrigatória"
     },
     {
-      "fieldName": "nacionaliade",
+      "fieldName": "nacionalidade",
       "fieldType": "String",
       "javadoc": "Nacionalidade não obrigatória"
     },

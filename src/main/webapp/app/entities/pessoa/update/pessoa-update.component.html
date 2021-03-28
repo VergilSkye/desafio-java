@@ -117,24 +117,24 @@
         <div class="form-group">
           <label
             class="form-control-label"
-            jhiTranslate="pessoaApp.pessoa.nacionaliade"
-            for="field_nacionaliade"
-            [ngbTooltip]="'pessoaApp.pessoa.help.nacionaliade' | translate"
-            >Nacionaliade</label
+            jhiTranslate="pessoaApp.pessoa.nacionalidade"
+            for="field_nacionalidade"
+            [ngbTooltip]="'pessoaApp.pessoa.help.nacionalidade' | translate"
+            >Nacionalidade</label
           >
           <input
             type="text"
             class="form-control"
-            name="nacionaliade"
-            id="field_nacionaliade"
-            data-cy="nacionaliade"
-            formControlName="nacionaliade"
+            name="nacionalidade"
+            id="field_nacionalidade"
+            data-cy="nacionalidade"
+            formControlName="nacionalidade"
           />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="pessoaApp.pessoa.cpf" for="field_cpf">Cpf</label>
-          <input type="text" class="form-control" name="cpf" id="field_cpf" data-cy="cpf" formControlName="cpf" />
+          <label class="form-control-label" jhiTranslate="pessoaApp.pessoa.CPF" for="field_cpf">CPF</label>
+          <input type="text" mask="000.000.000-00" class="form-control" name="cpf" id="field_cpf" data-cy="cpf" formControlName="cpf" />
           <div *ngIf="editForm.get('cpf')!.invalid && (editForm.get('cpf')!.dirty || editForm.get('cpf')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('cpf')?.errors?.required" jhiTranslate="entity.validation.required">
               This field is required.

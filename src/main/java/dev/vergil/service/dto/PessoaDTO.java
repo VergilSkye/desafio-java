@@ -53,7 +53,7 @@ public class PessoaDTO implements Serializable {
      * Nacionalidade não obrigatória
      */
     @ApiModelProperty(value = "Nacionalidade não obrigatória")
-    private String nacionaliade;
+    private String nacionalidade;
 
     @CPF
     @NotNull
@@ -107,12 +107,12 @@ public class PessoaDTO implements Serializable {
         this.naturalidade = naturalidade;
     }
 
-    public String getNacionaliade() {
-        return nacionaliade;
+    public String getNacionalidade() {
+        return nacionalidade;
     }
 
-    public void setNacionaliade(String nacionaliade) {
-        this.nacionaliade = nacionaliade;
+    public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
     }
 
     public String getCpf() {
@@ -154,7 +154,7 @@ public class PessoaDTO implements Serializable {
             ", email='" + getEmail() + "'" +
             ", dataNascimento='" + getDataNascimento() + "'" +
             ", naturalidade='" + getNaturalidade() + "'" +
-            ", nacionaliade='" + getNacionaliade() + "'" +
+            ", nacionalidade='" + getNacionalidade() + "'" +
             ", cpf='" + getCpf() + "'" +
             "}";
     }

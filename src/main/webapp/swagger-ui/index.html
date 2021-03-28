@@ -60,7 +60,6 @@
             requestInterceptor: function (req) {
               var authToken = localStorage.getItem('jhi-authenticationToken') || sessionStorage.getItem('jhi-authenticationToken');
               if (authToken) {
-                alert('PORRA');
                 console.warn(authToken);
                 authToken = JSON.parse(authToken);
                 console.warn(authToken);

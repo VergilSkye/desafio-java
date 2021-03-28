@@ -57,7 +57,7 @@
           <td>{{ pessoa.nome }}</td>
           <td jhiTranslate="{{ 'pessoaApp.TipoSexo.' + pessoa.sexo }}">{{ pessoa.sexo }}</td>
           <td>{{ pessoa.email }}</td>
-          <td>{{ pessoa.dataNascimento | formatMediumDate }}</td>
+          <td>{{ pessoa.dataNascimento | brazilDate }}</td>
           <td>{{ pessoa.naturalidade }}</td>
           <td>{{ pessoa.nacionalidade }}</td>
           <td>{{ pessoa.cpf! | mask: '000.000.000-00' }}</td>

@@ -4,13 +4,13 @@
       "home": {
         "title": "Pessoas",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Pessoa",
+        "createLabel": "Criar nova Pessoa",
         "createOrEditLabel": "Criar ou editar Pessoa",
-        "notFound": "Nenhum Pessoa encontrado"
+        "notFound": "Nenhuma Pessoa encontrado"
       },
-      "created": "Um novo Pessoa foi criado com o identificador {{ param }}",
-      "updated": "Um Pessoa foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Pessoa foi excluído com o identificador {{ param }}",
+      "created": "Uma nova Pessoa foi criada com o identificador {{ param }}",
+      "updated": "Uma Pessoa foi atualizada com o identificador {{ param }}",
+      "deleted": "Uma Pessoa foi excluída com o identificador {{ param }}",
       "delete": {
         "question": "Tem certeza de que deseja excluir Pessoa {{ id }}?"
       },
@@ -27,10 +27,10 @@
       "cpf": "Cpf",
       "CPF": "CPF",
       "help": {
-        "nome": "Nome obrigatorio",
-        "sexo": "Sexo enum com tres opcoes, Masculino, Feminino, Outros",
-        "email": "Email nao obrigatorio",
-        "dataNascimento": "Data de nascimento obrigatoria",
+        "nome": "Nome obrigatório",
+        "sexo": "Três opções: Masculino, Feminino, Outros",
+        "email": "Email não obrigatório",
+        "dataNascimento": "Data de nascimento obrigatória",
         "naturalidade": "Naturalidade não obrigatória",
         "nacionalidade": "Nacionalidade não obrigatória"
       }

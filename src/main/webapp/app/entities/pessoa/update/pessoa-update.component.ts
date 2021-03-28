@@ -22,7 +22,7 @@ export class PessoaUpdateComponent implements OnInit {
     id: [],
     nome: [null, [Validators.required]],
     sexo: [],
-    email: [],
+    email: ['', [Validators.email]],
     dataNascimento: [null, [Validators.required]],
     naturalidade: [],
     nacionalidade: [],

@@ -120,7 +120,7 @@
       "datetimelocal": "Este campo é do tipo data/hora.",
       "patternLogin": "Este campo só pode conter letras, números e e-mail.",
       "cpfdigit": "O dígito CPF é inválido ",
-      "cpfAlreadyInUse": "CPF já está sendo utiliazado por outra pessoa"
+      "cpfAlreadyInUse": "CPF já está sendo utilizado por outra pessoa"
     }
   },
   "error": {

@@ -8,7 +8,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { TranslateModule, TranslateService, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import * as dayjs from 'dayjs';
-import { NgbDateAdapter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { SERVER_API_URL } from './app.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
@@ -28,6 +28,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
+import { DateParserFormatter } from './shared/date/date-parser.formatter';
 
 @NgModule({
   imports: [
@@ -57,6 +58,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     Title,
     { provide: LOCALE_ID, useValue: 'pt' },
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
+    { provide: NgbDateParserFormatter, useClass: DateParserFormatter },
     httpInterceptorProviders,
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],

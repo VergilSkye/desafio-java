@@ -46,6 +46,12 @@
             <span jhiTranslate="pessoaApp.pessoa.nacionalidade">Nacionalidade</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="cpf"><span jhiTranslate="pessoaApp.pessoa.CPF">CPF</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="createdDate">
+            <span jhiTranslate="pessoaApp.pessoa.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedDate">
+            <span jhiTranslate="pessoaApp.pessoa.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -61,6 +67,8 @@
           <td>{{ pessoa.naturalidade }}</td>
           <td>{{ pessoa.nacionalidade }}</td>
           <td>{{ pessoa.cpf! | mask: '000.000.000-00' }}</td>
+          <td>{{ pessoa.createdDate | date: 'dd/MM/yy HH:mm' }}</td>
+          <td>{{ pessoa.lastModifiedDate | date: 'dd/MM/yy HH:mm' }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/pessoa', pessoa.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">

@@ -25,6 +25,8 @@
       "naturalidade": "Naturalidade",
       "nacionalidade": "Nacionalidade",
       "cpf": "Cpf",
+      "createdDate": "Created date",
+      "lastModifiedDate": "Modified date",
       "help": {
         "nome": "Nome obrigatorio",
         "sexo": "Sexo enum com tres opcoes, Masculino, Feminino, Outros",

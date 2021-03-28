@@ -41,7 +41,7 @@ import { DateParserFormatter } from './shared/date/date-parser.formatter';
     // Set this to true to enable service worker (PWA)
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
     HttpClientModule,
-    NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-' }),
+    NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

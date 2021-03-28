@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 
 import { isPresent } from 'app/core/util/operators';
@@ -43,7 +43,10 @@ export class PessoaService {
     const options = createRequestOption(req);
     return this.http
       .get<IPessoa[]>(this.resourceUrl, { params: options, observe: 'response' })
-      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+      .pipe(
+        tap(e => console.error(e)),
+        map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res))
+      );
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
@@ -81,6 +84,7 @@ export class PessoaService {
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
+    console.warn(res.body);
     if (res.body) {
       res.body.dataNascimento = res.body.dataNascimento ? dayjs(res.body.dataNascimento) : undefined;
     }
@@ -88,6 +92,7 @@ export class PessoaService {
   }
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
+    console.warn(res.body);
     if (res.body) {
       res.body.forEach((pessoa: IPessoa) => {
         pessoa.dataNascimento = pessoa.dataNascimento ? dayjs(pessoa.dataNascimento) : undefined;

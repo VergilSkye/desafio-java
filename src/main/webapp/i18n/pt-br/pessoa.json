@@ -26,6 +26,8 @@
       "nacionalidade": "Nacionalidade",
       "cpf": "Cpf",
       "CPF": "CPF",
+      "createdDate": "Criado em",
+      "lastModifiedDate": "Modificado em",
       "help": {
         "nome": "Nome obrigatório",
         "sexo": "Três opções: Masculino, Feminino, Outros",

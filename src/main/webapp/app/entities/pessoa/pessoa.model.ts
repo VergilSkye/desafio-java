@@ -10,6 +10,10 @@ export interface IPessoa {
   naturalidade?: string | null;
   nacionalidade?: string | null;
   cpf?: string;
+  createdBy?: string;
+  createdDate?: Date;
+  lastModifiedBy?: string;
+  lastModifiedDate?: Date;
 }
 
 export class Pessoa implements IPessoa {
@@ -21,7 +25,11 @@ export class Pessoa implements IPessoa {
     public dataNascimento?: dayjs.Dayjs,
     public naturalidade?: string | null,
     public nacionalidade?: string | null,
-    public cpf?: string
+    public cpf?: string,
+    public createdBy?: string,
+    public createdDate?: Date,
+    public lastModifiedBy?: string,
+    public lastModifiedDate?: Date
   ) {}
 }
 

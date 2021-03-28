@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.br.CPF;
 @Entity
 @Table(name = "pessoa")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Pessoa implements Serializable {
+public class Pessoa extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -205,6 +205,10 @@ public class Pessoa implements Serializable {
             ", naturalidade='" + getNaturalidade() + "'" +
             ", nacionalidade='" + getNacionalidade() + "'" +
             ", cpf='" + getCpf() + "'" +
+            ", createAt='" + getCreatedBy() + "'" +
+            ", createdBy='" + getCreatedDate() + "'" +
+            ", updateAt='" + getLastModifiedDate() + "'" +
+            ", updateBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

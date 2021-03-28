@@ -21,8 +21,8 @@ export class AuthServerProvider {
   ) {}
 
   getToken(): string {
-    const tokenInLocalStorage: string | null = this.$localStorage.retrieve('authenticationToken');
-    const tokenInSessionStorage: string | null = this.$sessionStorage.retrieve('authenticationToken');
+    const tokenInLocalStorage: string | null = this.$localStorage.retrieve('jhi-authenticationToken');
+    const tokenInSessionStorage: string | null = this.$sessionStorage.retrieve('jhi-authenticationToken');
     return tokenInLocalStorage ?? tokenInSessionStorage ?? '';
   }
 

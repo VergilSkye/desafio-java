@@ -1,5 +1,6 @@
 package dev.vergil.service.dto;
 
+import dev.vergil.domain.AbstractAuditingEntity;
 import dev.vergil.domain.enumeration.TipoSexo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,7 +14,7 @@ import org.hibernate.validator.constraints.br.CPF;
  * A DTO for the {@link dev.vergil.domain.Pessoa} entity.
  */
 @ApiModel(description = "The Pessoa entity.\n@author Virgílio Stefanin")
-public class PessoaDTO implements Serializable {
+public class PessoaDTO extends AbstractAuditingEntity implements Serializable {
 
     private Long id;
 
@@ -156,6 +157,10 @@ public class PessoaDTO implements Serializable {
             ", naturalidade='" + getNaturalidade() + "'" +
             ", nacionalidade='" + getNacionalidade() + "'" +
             ", cpf='" + getCpf() + "'" +
+            ", createAt='" + getCreatedBy() + "'" +
+            ", createdBy='" + getCreatedDate() + "'" +
+            ", updateAt='" + getLastModifiedDate() + "'" +
+            ", updateBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

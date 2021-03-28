@@ -1,1 +1,32 @@
-<h1>Olá chat</h1>
+<div class="chat-messages">
+  <div class="row" *ngFor="let message of messages">
+    <div class="col-sm-2">
+      <strong>{{ message.userLogin }}</strong>
+    </div>
+    <div class="col-sm-8">
+      {{ message.message }}
+    </div>
+    <div class="col-sm-2">
+      <div>
+        {{ message.time | date: 'short' }}
+      </div>
+    </div>
+  </div>
+</div>
+<form name="chatForm" (ngSubmit)="sendMessage(message)" #chatForm="ngForm">
+  <div class="row mt-2">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        name="message"
+        [(ngModel)]="message"
+        autocomplete="off"
+        placeholder="Digite uma mensagem..."
+      />
+      <span class="input-group-btn">
+        <button class="btn btn-secondary btn-success" type="submit">Enviar</button>
+      </span>
+    </div>
+  </div>
+</form>

@@ -51,7 +51,7 @@ describe('Auth JWT', () => {
 
       // THEN
       httpMock.verify();
-      expect(localStorageService.store).toHaveBeenCalledWith('authenticationToken', '1');
+      expect(localStorageService.store).toHaveBeenCalledWith('jhi-authenticationToken', '1');
       expect(sessionStorageService.clear).toHaveBeenCalled();
     });
 
@@ -66,7 +66,7 @@ describe('Auth JWT', () => {
 
       // THEN
       httpMock.verify();
-      expect(sessionStorageService.store).toHaveBeenCalledWith('authenticationToken', '1');
+      expect(sessionStorageService.store).toHaveBeenCalledWith('jhi-authenticationToken', '1');
       expect(localStorageService.clear).toHaveBeenCalled();
     });
   });

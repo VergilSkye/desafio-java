@@ -34,8 +34,8 @@ export class AuthServerProvider {
 
   logout(): Observable<void> {
     return new Observable(observer => {
-      this.$localStorage.clear('authenticationToken');
-      this.$sessionStorage.clear('authenticationToken');
+      this.$localStorage.clear('jhi-authenticationToken');
+      this.$sessionStorage.clear('jhi-authenticationToken');
       observer.complete();
     });
   }
@@ -43,11 +43,11 @@ export class AuthServerProvider {
   private authenticateSuccess(response: JwtToken, rememberMe: boolean): void {
     const jwt = response.id_token;
     if (rememberMe) {
-      this.$localStorage.store('authenticationToken', jwt);
-      this.$sessionStorage.clear('authenticationToken');
+      this.$localStorage.store('jhi-authenticationToken', jwt);
+      this.$sessionStorage.clear('jhi-authenticationToken');
     } else {
-      this.$sessionStorage.store('authenticationToken', jwt);
-      this.$localStorage.clear('authenticationToken');
+      this.$sessionStorage.store('jhi-authenticationToken', jwt);
+      this.$localStorage.clear('jhi-authenticationToken');
     }
   }
 }

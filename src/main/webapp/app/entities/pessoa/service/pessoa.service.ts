@@ -84,7 +84,6 @@ export class PessoaService {
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
-    console.warn(res.body);
     if (res.body) {
       res.body.dataNascimento = res.body.dataNascimento ? dayjs(res.body.dataNascimento) : undefined;
     }
@@ -92,7 +91,6 @@ export class PessoaService {
   }
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
-    console.warn(res.body);
     if (res.body) {
       res.body.forEach((pessoa: IPessoa) => {
         pessoa.dataNascimento = pessoa.dataNascimento ? dayjs(pessoa.dataNascimento) : undefined;

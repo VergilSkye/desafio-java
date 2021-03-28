@@ -24,7 +24,7 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
  */
 
 @Controller
-public class ChatService {
+public class ChatService implements ApplicationListener<SessionDisconnectEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(ChatService.class);
 
@@ -36,7 +36,7 @@ public class ChatService {
         this.messagingTemplate = messagingTemplate;
     }
 
-    @SubscribeMapping("/chat/all")
+    @SubscribeMapping("/topic/chat")
     public void subscribe(StompHeaderAccessor stompHeaderAccessor, Principal principal) {
         String login = SecurityUtils.getCurrentUserLogin().orElse("anonymoususer");
         String ipAddress = stompHeaderAccessor.getSessionAttributes().get(IP_ADDRESS).toString();
@@ -44,15 +44,26 @@ public class ChatService {
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setUserLogin("System");
         messageDTO.setTime(dateTimeFormatter.format(ZonedDateTime.now()));
-        messageDTO.setMessage(login + " joined the chat");
-        messagingTemplate.convertAndSend("/chat/all", messageDTO);
+        messageDTO.setMessage(login + " entrou no chat");
+        messagingTemplate.convertAndSend("/topic/chat", messageDTO);
     }
 
-    @MessageMapping("/chat")
-    @SendTo("/chat/all")
+    @MessageMapping("/topic/message")
+    @SendTo("/topic/chat")
     public MessageDTO sendChat(@Payload MessageDTO messageDTO, StompHeaderAccessor stompHeaderAccessor, Principal principal) {
         messageDTO.setUserLogin(principal.getName());
         return setupMessageDTO(messageDTO, stompHeaderAccessor, principal);
+    }
+
+    @Override
+    public void onApplicationEvent(SessionDisconnectEvent event) {
+        // when the user disconnects, send a message saying that hey are leaving
+        log.info("{} disconnected from the chat websockets", event.getUser().getName());
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setUserLogin("System");
+        messageDTO.setTime(dateTimeFormatter.format(ZonedDateTime.now()));
+        messageDTO.setMessage(event.getUser().getName() + " saiu do chat");
+        messagingTemplate.convertAndSend("/topic/chat", messageDTO);
     }
 
     private MessageDTO setupMessageDTO(MessageDTO messageDTO, StompHeaderAccessor stompHeaderAccessor, Principal principal) {

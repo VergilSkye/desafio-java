@@ -19,7 +19,8 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
-    const token: string | null = this.localStorage.retrieve('authenticationToken') ?? this.sessionStorage.retrieve('authenticationToken');
+    const token: string | null =
+      this.localStorage.retrieve('jhi-authenticationToken') ?? this.sessionStorage.retrieve('jhi-authenticationToken');
     if (token) {
       request = request.clone({
         setHeaders: {

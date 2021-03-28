@@ -20,6 +20,12 @@ public class WebsocketSecurityConfiguration extends AbstractSecurityWebSocketMes
             // (i.e. cannot send messages directly to /topic/)
             // (i.e. cannot subscribe to /topic/messages/* to get messages sent to
             // /topic/messages-user<id>)
+            .simpDestMatchers("/topic/message")
+            .permitAll()
+            .simpDestMatchers("/topic/chat")
+            .permitAll()
+            .simpDestMatchers("/topic/chat/**")
+            .permitAll()
             .simpDestMatchers("/topic/**")
             .authenticated()
             // message types other than MESSAGE and SUBSCRIBE

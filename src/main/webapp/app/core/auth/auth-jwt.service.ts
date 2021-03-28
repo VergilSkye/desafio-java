@@ -21,8 +21,8 @@ export class AuthServerProvider {
   ) {}
 
   getToken(): string {
-    const tokenInLocalStorage: string | null = this.$localStorage.retrieve('jhi-authenticationToken');
-    const tokenInSessionStorage: string | null = this.$sessionStorage.retrieve('jhi-authenticationToken');
+    const tokenInLocalStorage: string | null = this.$localStorage.retrieve('authenticationToken');
+    const tokenInSessionStorage: string | null = this.$sessionStorage.retrieve('authenticationToken');
     return tokenInLocalStorage ?? tokenInSessionStorage ?? '';
   }
 
@@ -34,20 +34,21 @@ export class AuthServerProvider {
 
   logout(): Observable<void> {
     return new Observable(observer => {
-      this.$localStorage.clear('jhi-authenticationToken');
-      this.$sessionStorage.clear('jhi-authenticationToken');
+      this.$localStorage.clear('authenticationToken');
+      this.$sessionStorage.clear('authenticationToken');
       observer.complete();
     });
   }
 
   private authenticateSuccess(response: JwtToken, rememberMe: boolean): void {
     const jwt = response.id_token;
+    console.warn(jwt);
     if (rememberMe) {
-      this.$localStorage.store('jhi-authenticationToken', jwt);
-      this.$sessionStorage.clear('jhi-authenticationToken');
+      this.$localStorage.store('authenticationToken', jwt);
+      this.$sessionStorage.clear('authenticationToken');
     } else {
-      this.$sessionStorage.store('jhi-authenticationToken', jwt);
-      this.$localStorage.clear('jhi-authenticationToken');
+      this.$sessionStorage.store('authenticationToken', jwt);
+      this.$localStorage.clear('authenticationToken');
     }
   }
 }

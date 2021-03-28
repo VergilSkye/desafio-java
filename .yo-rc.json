@@ -43,6 +43,9 @@
     "clientThemeVariant": "",
     "languages": ["pt-br", "en"],
     "entities": ["Pessoa"],
-    "lastLiquibaseTimestamp": 1616759375000
+    "lastLiquibaseTimestamp": 1616759375000,
+    "herokuAppName": "agile-badlands-61531",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "11"
   }
 }

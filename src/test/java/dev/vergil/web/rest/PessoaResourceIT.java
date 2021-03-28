@@ -40,8 +40,8 @@ class PessoaResourceIT {
     private static final TipoSexo DEFAULT_SEXO = TipoSexo.MASCULINO;
     private static final TipoSexo UPDATED_SEXO = TipoSexo.FEMININO;
 
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
+    private static final String DEFAULT_EMAIL = "teste@gmailcom";
+    private static final String UPDATED_EMAIL = "teste2@gmailcom";
 
     private static final LocalDate DEFAULT_DATA_NASCIMENTO = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATA_NASCIMENTO = LocalDate.now(ZoneId.systemDefault());
@@ -52,8 +52,8 @@ class PessoaResourceIT {
     private static final String DEFAULT_NACIONALIADE = "AAAAAAAAAA";
     private static final String UPDATED_NACIONALIADE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CPF = "AAAAAAAAAA";
-    private static final String UPDATED_CPF = "BBBBBBBBBB";
+    private static final String DEFAULT_CPF = "26164993040";
+    private static final String UPDATED_CPF = "59266707058";
 
     private static final String ENTITY_API_URL = "/api/pessoas";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";

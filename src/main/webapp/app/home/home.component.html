@@ -1,21 +1,41 @@
 <div class="row">
   <div class="col-md-3">
-    <span class="hipster img-fluid rounded"></span>
+    <span class="hipster img-fluid rounded align-self-center my-auto"></span>
   </div>
 
   <div class="col-md-9">
-    <h1 class="display-4" jhiTranslate="home.title">Welcome, Java Hipster!</h1>
+    <h1 class="display-4" jhiTranslate="home.title">Welcome to my technical challenge!</h1>
 
-    <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
+    <p class="lead" jhiTranslate="home.subtitle">Basic instructions</p>
 
     <div [ngSwitch]="isAuthenticated()">
       <div class="alert alert-success" *ngSwitchCase="true">
         <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }"
           >You are logged in as user "{{ account.login }}".</span
         >
+        <p jhiTranslate="home.instrutions.nav-superior"></p>
+        <em><span jhiTranslate="global.menu.entities.main">Recursos</span></em>
+        <strong
+          ><span jhiTranslate="global.menu.entities.pessoa">Pessoa</span>,
+          <span jhiTranslate="global.menu.entities.chat">Chat</span></strong
+        ><br />
+        <span jhiTranslate="home.instrutions.people"></span><br />
+        <span jhiTranslate="home.instrutions.chat"></span><br />
+        <br />
+        <em><span jhiTranslate="global.menu.admin.main">Administration</span></em
+        ><br />
+        <em><span jhiTranslate="global.menu.admin.userManagement">User management</span></em
+        >: <span jhiTranslate="home.instrutions.user-management"></span><br />
+        <em><span jhiTranslate="global.menu.admin.tracker">User tracker</span></em
+        >: <span jhiTranslate="home.instrutions.tracker"></span><br />
+        <em><span jhiTranslate="global.menu.admin.apidocs">API</span></em
+        >: <span jhiTranslate="home.instrutions.api"></span><br />
+        <em><span jhiTranslate="global.menu.admin.database">Database</span></em
+        >: <span jhiTranslate="home.instrutions.database"></span><br />
       </div>
 
       <div class="alert alert-warning" *ngSwitchCase="false">
+        <p>Por favor crie uma conta ou utilize a conta padrão do sistema</p>
         <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
         <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a
         ><span jhiTranslate="global.messages.info.authenticated.suffix"
@@ -30,49 +50,16 @@
       </div>
     </div>
 
-    <p jhiTranslate="home.question">If you have any question on JHipster:</p>
-
-    <ul>
-      <li>
-        <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.homepage"
-          >JHipster homepage</a
-        >
-      </li>
-      <li>
-        <a
-          href="http://stackoverflow.com/tags/jhipster/info"
-          target="_blank"
-          rel="noopener noreferrer"
-          jhiTranslate="home.link.stackoverflow"
-          >JHipster on Stack Overflow</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/jhipster/generator-jhipster/issues?state=open"
-          target="_blank"
-          rel="noopener noreferrer"
-          jhiTranslate="home.link.bugtracker"
-          >JHipster bug tracker</a
-        >
-      </li>
-      <li>
-        <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.chat"
-          >JHipster public chat room</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.follow"
-          >follow @jhipster on Twitter</a
-        >
-      </li>
-    </ul>
-
     <p>
-      <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span>
-      <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.github"
+      <span jhiTranslate="home.source">To download and run the source code </span>
+      <a href="https://github.com/VergilSkye/desafio-java.git" target="_blank" rel="noopener noreferrer" jhiTranslate="home.github"
         >GitHub</a
-      >!
+      >
+      <br />
+      <span jhiTranslate="home.docker">To rotate the docker image, please use </span>
+      <a href="https://registry.hub.docker.com/r/vergilskye/pessoa" target="_blank" rel="noopener noreferrer" jhiTranslate="home.dockerhub"
+        >DockerHub</a
+      >
     </p>
   </div>
 </div>

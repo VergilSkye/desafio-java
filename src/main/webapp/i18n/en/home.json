@@ -1,11 +1,20 @@
 {
   "home": {
-    "title": "Welcome, Java Hipster!",
-    "subtitle": "This is your homepage",
+    "title": "Welcome to my technical challenge!",
+    "subtitle": "Basic instructions",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
     "question": "If you have any question on JHipster:",
+    "instrutions": {
+      "nav-superior": "At the top navbar we have the navigation menu ",
+      "people": "People: Simple registration of the people entity",
+      "chat": "Chat: Chat between users of the application",
+      "user-management": "Administer system accounts",
+      "tracker": "Track logged in users ",
+      "api": "Here the SWAGGER is located",
+      "database": "To access the database using the URL: \"jdbc:h2:mem:pessoa\", on User Name: \"pessoa\", and leave the password empty"
+    },
     "link": {
       "homepage": "JHipster homepage",
       "stackoverflow": "JHipster on Stack Overflow",
@@ -14,6 +23,9 @@
       "follow": "follow @jhipster on Twitter"
     },
     "like": "If you like JHipster, don't forget to give us a star on",
+    "source": "To download and run the source code, please access",
+    "docker": "To spin the docker image, please use ",
+    "dockerhub": "docker pull vergilskye/pessoa",
     "github": "GitHub"
   }
 }

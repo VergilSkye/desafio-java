@@ -1,11 +1,20 @@
 {
   "home": {
-    "title": "Bem vindo, Java Hipster!",
-    "subtitle": "Esta é a página principal",
+    "title": "Bem vindo ao meu desafio técnico!",
+    "subtitle": "Instruções Básicas",
     "logged": {
       "message": "Você está logado como \"{{username}}\"."
     },
     "question": "Em caso de dúvida sobre o JHipster:",
+    "instrutions": {
+      "nav-superior": "Na navbar superior temos o menu de navegação",
+      "people": "Pessoas: Cadastro simples da entidade pessoa",
+      "chat": "Chat: Chat entre os usuários da aplicação",
+      "user-management": "Administrar contas do sistema",
+      "tracker": "Rastrear usuários logados",
+      "api": "Aqui que está localizado o SWAGGER",
+      "database": "Para acessar o banco utilize na URL: \"jdbc:h2:mem:pessoa\", no User Name: \"pessoa\", e deixe a senha vazia"
+    },
     "link": {
       "homepage": "Página principal JHipster",
       "stackoverflow": "JHipster no Stack Overflow",
@@ -14,6 +23,9 @@
       "follow": "siga @jhipster no Twitter"
     },
     "like": "Se você gosta do JHipster, não se esqueça de avaliar no",
+    "source": "Para baixar e rodar o código fonte, por favor acesse",
+    "docker": "Para rodar a imagem docker, por favor use",
+    "dockerhub": "docker pull vergilskye/pessoa",
     "github": "GitHub"
   }
 }

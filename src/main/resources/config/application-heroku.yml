@@ -21,4 +21,4 @@ server:
 
 jhipster:
   mail:
-    base-url: https://agile-badlands-61531.herokuapp.com/
+    base-url: https://agile-badlands-61531.herokuapp.com

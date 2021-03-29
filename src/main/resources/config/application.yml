@@ -157,7 +157,7 @@ jhipster:
   mail:
     from: pessoa@localhost
   api-docs:
-    default-include-pattern: ${server.servlet.context-path:}/api/.*
+    default-include-pattern: ${server.servlet.context-path:}/(api/.*|source)
     management-include-pattern: ${server.servlet.context-path:}/management/.*
     title: pessoa API
     description: pessoa API documentation

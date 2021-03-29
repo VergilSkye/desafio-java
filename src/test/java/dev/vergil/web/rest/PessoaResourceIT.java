@@ -82,7 +82,7 @@ class PessoaResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Pessoa createEntity(EntityManager em) {
-        Pessoa pessoa = new Pessoa()
+        return new Pessoa()
             .nome(DEFAULT_NOME)
             .sexo(DEFAULT_SEXO)
             .email(DEFAULT_EMAIL)
@@ -90,7 +90,6 @@ class PessoaResourceIT {
             .naturalidade(DEFAULT_NATURALIDADE)
             .nacionalidade(DEFAULT_NACIONALIADE)
             .cpf(DEFAULT_CPF);
-        return pessoa;
     }
 
     /**
@@ -385,5 +384,63 @@ class PessoaResourceIT {
         // Validate the database contains one less item
         List<Pessoa> pessoaList = pessoaRepository.findAll();
         assertThat(pessoaList).hasSize(databaseSizeBeforeDelete - 1);
+    }
+
+    @Test
+    @Transactional
+    void verifyCPFAlreadyUse() throws Exception {
+        int databaseSizeBeforeCreate = pessoaRepository.findAll().size();
+        // Create the Pessoa with DEFAULT CPF
+        PessoaDTO pessoaDTO = pessoaMapper.toDto(pessoa);
+        restPessoaMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(pessoaDTO)))
+            .andExpect(status().isCreated());
+        // Validate the Pessoa in the database
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        assertThat(pessoaList).hasSize(databaseSizeBeforeCreate + 1);
+        restPessoaMockMvc
+            .perform(get(ENTITY_API_URL + "/cpf?" + "cpf=" + DEFAULT_CPF).contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string("1"));
+    }
+
+
+    @Test
+    @Transactional
+    void verifyCPFNotUsed() throws Exception {
+        int databaseSizeBeforeCreate = pessoaRepository.findAll().size();
+        // Create the Pessoa with DEFAULT CPF
+        PessoaDTO pessoaDTO = pessoaMapper.toDto(pessoa);
+        restPessoaMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(pessoaDTO)))
+            .andExpect(status().isCreated());
+
+        // Validate the Pessoa in the database
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        assertThat(pessoaList).hasSize(databaseSizeBeforeCreate + 1);
+        restPessoaMockMvc
+            .perform(get(ENTITY_API_URL + "/cpf?" + "cpf=" + UPDATED_CPF).contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string("0"));
+    }
+
+
+    @Test
+    @Transactional
+    void verifyCPFUsedByASamePessoa() throws Exception {
+        int databaseSizeBeforeCreate = pessoaRepository.findAll().size();
+        // Create the Pessoa with DEFAULT CPF
+        PessoaDTO pessoaDTO = pessoaMapper.toDto(pessoa);
+        restPessoaMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(pessoaDTO)))
+            .andExpect(status().isCreated());
+        // Validate the Pessoa in the database
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        assertThat(pessoaList).hasSize(databaseSizeBeforeCreate + 1);
+        Pessoa testPessoa = pessoaList.get(pessoaList.size() - 1);
+        restPessoaMockMvc
+            .perform(get(ENTITY_API_URL + "/cpf?" + "cpf=" + DEFAULT_CPF + "&id=" + testPessoa.getId()).contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(content().string("0"));
     }
 }

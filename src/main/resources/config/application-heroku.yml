@@ -18,3 +18,7 @@ eureka:
 
 server:
   port: ${PORT:8080}
+
+jhipster:
+  mail:
+    base-url: https://agile-badlands-61531.herokuapp.com/

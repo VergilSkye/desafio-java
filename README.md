@@ -1,11 +1,21 @@
-# Desafio Técnico Java
-Essa aplicação foi iniciada com JHipster 7.0.0 e é bastante customizada.
+<div align="center">
 
-Deploy em [heroku](https://agile-badlands-61531.herokuapp.com/).
+  #Desafio Técnico Java
+  Essa aplicação foi iniciada com JHipster 7.0.0 e é bastante customizada.
+  
+  Deploy em [heroku](https://agile-badlands-61531.herokuapp.com/).  
+  Docker em [docker-hub](https://registry.hub.docker.com/r/vergilskye/pessoa).
 
-Docker em [docker-hub](https://registry.hub.docker.com/r/vergilskye/pessoa).
+  ![](https://img.shields.io/badge/Autor-Virgilio%20Stefanin-brightgreen)
+  ![](https://img.shields.io/badge/Back--End-Spring%20Boot-brightgreen)
+  ![](https://img.shields.io/badge/Front--End-Angular%2011-brightgreen)
+  
+</div> 
 
-É necessário ter instalado o JDK, pelo menos o 11, na sua máquina. Caso não tenha, por favor user a imagem docker
+<sup>
+É necessário ter instalado o JDK, pelo menos o 11, na sua máquina. Caso não tenha, por favor use a imagem docker.
+</sup>
+
 ## Rodando Testes Unitários
 Para rodar os testes unitários, por favor use o comando.
 ```
@@ -20,24 +30,23 @@ Para rodar os testes de integração, por favor use o comando.
 
 ### Rodando o pacote jar
 
-depois de ser rodado os testes de integração
-rode o spring boot com o 
+depois de ser verificado a aplicação com os testes de integração
+comece o programa java utilizando o comando.
 ```
 java -jar target/*.jar
 ```
-Agora navegue para [http://localhost:8080](http://localhost:8080) no seu browser.
+Agora navegue para [http://localhost:8080](http://localhost:8080) no seu navegador.
 
 ### Testes frontend
 
-Testes unitários são rodados pelo [Jest]() com o comando
-
+Testes unitários são rodados pelo [Jest]() com o comando.
 ```
 npm test
 ```
 
-
-Essas são todas as instruções para rodas o teste e para roda a aplicação,
-caso queria apenas o jar rode o comando.
+### Outras Informações
+Essas são todas as instruções sobre os testes.
+Para criar apenas o jar com o swagger habilitado rode o comando.
 ```
 ./mvnw -Pprod -Papi-docs package -DskipTests=true
 ```

@@ -7,7 +7,7 @@
 
     <groupId>dev.vergil</groupId>
     <artifactId>pessoa</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Pessoa</name>
 
@@ -84,7 +84,7 @@
         <properties-maven-plugin.version>1.0.0</properties-maven-plugin.version>
         <sonar-maven-plugin.version>3.8.0.2131</sonar-maven-plugin.version>
         <!-- jhipster-needle-maven-property -->
-        <image-version>0.0.2</image-version>
+        <image-version>0.0.3</image-version>
     </properties>
 
     <dependencyManagement>

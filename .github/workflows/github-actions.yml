@@ -25,9 +25,9 @@ jobs:
             - name: Run backend test
               run: |
                   chmod +x mvnw
-                  npm run ci:backend:test            
-            - name: Package application
-              run: npm run java:jar:prod
+                  npm run ci:backend:test
+            - name: Package application and deploy image
+              run: npm run java:docker:deploy:image
             - name: Deploy to Heroku
               if: github.event_name == 'push' && github.ref == 'refs/heads/main'
               env:

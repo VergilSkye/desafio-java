@@ -27,6 +27,9 @@ jobs:
                   chmod +x mvnw
                   npm run ci:backend:test
             - name: Package application and deploy image
+              env:
+                REGISTRY_USER: ${{secrets.REGISTRY_USER}}
+                REGISTRY_PASSWORD: ${{secrets.REGISTRY_PASSWORD}}
               run: npm run java:docker:deploy:image
             - name: Deploy to Heroku
               if: github.event_name == 'push' && github.ref == 'refs/heads/main'

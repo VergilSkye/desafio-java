@@ -84,6 +84,7 @@
         <properties-maven-plugin.version>1.0.0</properties-maven-plugin.version>
         <sonar-maven-plugin.version>3.8.0.2131</sonar-maven-plugin.version>
         <!-- jhipster-needle-maven-property -->
+        <image-version>0.0.2</image-version>
     </properties>
 
     <dependencyManagement>
@@ -576,7 +577,11 @@
                             <image>adoptopenjdk:11-jre-hotspot</image>
                         </from>
                         <to>
-                            <image>pessoa:latest</image>
+                            <image>pessoa</image>
+                            <tags>
+                                <tag>${image-version}</tag>
+                                <tag>latest</tag>
+                            </tags>
                         </to>
                         <container>
                             <entrypoint>

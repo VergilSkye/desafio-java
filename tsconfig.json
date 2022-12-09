@@ -1,28 +1,28 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "module": "es2020",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "experimentalDecorators": true,
+    "baseUrl": "src/main/webapp/",
+    "outDir": "./target/classes/static/",
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "strictNullChecks": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "outDir": "target/classes/static/app",
-    "lib": ["es2018", "dom"],
-    "baseUrl": "./",
-    "paths": {
-      "app/*": ["src/main/webapp/app/*"]
-    },
-    "importHelpers": true,
-    "downlevelIteration": true,
+    "sourceMap": true,
     "declaration": false,
-    "forceConsistentCasingInFileNames": true
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2020",
+    "module": "es2020",
+    "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
-    "strictTemplates": true,
     "strictInputAccessModifiers": true,
+    "strictTemplates": true,
     "preserveWhitespaces": true
   }
 }

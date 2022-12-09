@@ -49,8 +49,8 @@ class PessoaResourceIT {
     private static final String DEFAULT_NATURALIDADE = "AAAAAAAAAA";
     private static final String UPDATED_NATURALIDADE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_NACIONALIADE = "AAAAAAAAAA";
-    private static final String UPDATED_NACIONALIADE = "BBBBBBBBBB";
+    private static final String DEFAULT_NACIONALIDADE = "AAAAAAAAAA";
+    private static final String UPDATED_NACIONALIDADE = "BBBBBBBBBB";
 
     private static final String DEFAULT_CPF = "26164993040";
     private static final String UPDATED_CPF = "59266707058";
@@ -88,8 +88,9 @@ class PessoaResourceIT {
             .email(DEFAULT_EMAIL)
             .dataNascimento(DEFAULT_DATA_NASCIMENTO)
             .naturalidade(DEFAULT_NATURALIDADE)
-            .nacionalidade(DEFAULT_NACIONALIADE)
+            .nacionalidade(DEFAULT_NACIONALIDADE)
             .cpf(DEFAULT_CPF);
+        return pessoa;
     }
 
     /**
@@ -99,15 +100,14 @@ class PessoaResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Pessoa createUpdatedEntity(EntityManager em) {
-        Pessoa pessoa = new Pessoa()
+        return new Pessoa()
             .nome(UPDATED_NOME)
             .sexo(UPDATED_SEXO)
             .email(UPDATED_EMAIL)
             .dataNascimento(UPDATED_DATA_NASCIMENTO)
             .naturalidade(UPDATED_NATURALIDADE)
-            .nacionalidade(UPDATED_NACIONALIADE)
+            .nacionalidade(UPDATED_NACIONALIDADE)
             .cpf(UPDATED_CPF);
-        return pessoa;
     }
 
     @BeforeEach
@@ -134,7 +134,7 @@ class PessoaResourceIT {
         assertThat(testPessoa.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testPessoa.getDataNascimento()).isEqualTo(DEFAULT_DATA_NASCIMENTO);
         assertThat(testPessoa.getNaturalidade()).isEqualTo(DEFAULT_NATURALIDADE);
-        assertThat(testPessoa.getNacionalidade()).isEqualTo(DEFAULT_NACIONALIADE);
+        assertThat(testPessoa.getNacionalidade()).isEqualTo(DEFAULT_NACIONALIDADE);
         assertThat(testPessoa.getCpf()).isEqualTo(DEFAULT_CPF);
     }
 
@@ -228,7 +228,7 @@ class PessoaResourceIT {
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].dataNascimento").value(hasItem(DEFAULT_DATA_NASCIMENTO.toString())))
             .andExpect(jsonPath("$.[*].naturalidade").value(hasItem(DEFAULT_NATURALIDADE)))
-            .andExpect(jsonPath("$.[*].nacionalidade").value(hasItem(DEFAULT_NACIONALIADE)))
+            .andExpect(jsonPath("$.[*].nacionalidade").value(hasItem(DEFAULT_NACIONALIDADE)))
             .andExpect(jsonPath("$.[*].cpf").value(hasItem(DEFAULT_CPF)));
     }
 
@@ -249,7 +249,7 @@ class PessoaResourceIT {
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.dataNascimento").value(DEFAULT_DATA_NASCIMENTO.toString()))
             .andExpect(jsonPath("$.naturalidade").value(DEFAULT_NATURALIDADE))
-            .andExpect(jsonPath("$.nacionalidade").value(DEFAULT_NACIONALIADE))
+            .andExpect(jsonPath("$.nacionalidade").value(DEFAULT_NACIONALIDADE))
             .andExpect(jsonPath("$.cpf").value(DEFAULT_CPF));
     }
 
@@ -262,7 +262,7 @@ class PessoaResourceIT {
 
     @Test
     @Transactional
-    void putNewPessoa() throws Exception {
+    void putExistingPessoa() throws Exception {
         // Initialize the database
         pessoaRepository.saveAndFlush(pessoa);
 
@@ -278,7 +278,7 @@ class PessoaResourceIT {
             .email(UPDATED_EMAIL)
             .dataNascimento(UPDATED_DATA_NASCIMENTO)
             .naturalidade(UPDATED_NATURALIDADE)
-            .nacionalidade(UPDATED_NACIONALIADE)
+            .nacionalidade(UPDATED_NACIONALIDADE)
             .cpf(UPDATED_CPF);
         PessoaDTO pessoaDTO = pessoaMapper.toDto(updatedPessoa);
 
@@ -299,7 +299,7 @@ class PessoaResourceIT {
         assertThat(testPessoa.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testPessoa.getDataNascimento()).isEqualTo(UPDATED_DATA_NASCIMENTO);
         assertThat(testPessoa.getNaturalidade()).isEqualTo(UPDATED_NATURALIDADE);
-        assertThat(testPessoa.getNacionalidade()).isEqualTo(UPDATED_NACIONALIADE);
+        assertThat(testPessoa.getNacionalidade()).isEqualTo(UPDATED_NACIONALIDADE);
         assertThat(testPessoa.getCpf()).isEqualTo(UPDATED_CPF);
     }
 
@@ -370,6 +370,156 @@ class PessoaResourceIT {
 
     @Test
     @Transactional
+    void partialUpdatePessoaWithPatch() throws Exception {
+        // Initialize the database
+        pessoaRepository.saveAndFlush(pessoa);
+
+        int databaseSizeBeforeUpdate = pessoaRepository.findAll().size();
+
+        // Update the pessoa using partial update
+        Pessoa partialUpdatedPessoa = new Pessoa();
+        partialUpdatedPessoa.setId(pessoa.getId());
+
+        partialUpdatedPessoa
+            .nome(UPDATED_NOME)
+            .sexo(UPDATED_SEXO)
+            .dataNascimento(UPDATED_DATA_NASCIMENTO)
+            .naturalidade(UPDATED_NATURALIDADE)
+            .nacionalidade(UPDATED_NACIONALIDADE)
+            .cpf(UPDATED_CPF);
+
+        restPessoaMockMvc
+            .perform(
+                patch(ENTITY_API_URL_ID, partialUpdatedPessoa.getId())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(partialUpdatedPessoa))
+            )
+            .andExpect(status().isOk());
+
+        // Validate the Pessoa in the database
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        assertThat(pessoaList).hasSize(databaseSizeBeforeUpdate);
+        Pessoa testPessoa = pessoaList.get(pessoaList.size() - 1);
+        assertThat(testPessoa.getNome()).isEqualTo(UPDATED_NOME);
+        assertThat(testPessoa.getSexo()).isEqualTo(UPDATED_SEXO);
+        assertThat(testPessoa.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testPessoa.getDataNascimento()).isEqualTo(UPDATED_DATA_NASCIMENTO);
+        assertThat(testPessoa.getNaturalidade()).isEqualTo(UPDATED_NATURALIDADE);
+        assertThat(testPessoa.getNacionalidade()).isEqualTo(UPDATED_NACIONALIDADE);
+        assertThat(testPessoa.getCpf()).isEqualTo(UPDATED_CPF);
+    }
+
+    @Test
+    @Transactional
+    void fullUpdatePessoaWithPatch() throws Exception {
+        // Initialize the database
+        pessoaRepository.saveAndFlush(pessoa);
+
+        int databaseSizeBeforeUpdate = pessoaRepository.findAll().size();
+
+        // Update the pessoa using partial update
+        Pessoa partialUpdatedPessoa = new Pessoa();
+        partialUpdatedPessoa.setId(pessoa.getId());
+
+        partialUpdatedPessoa
+            .nome(UPDATED_NOME)
+            .sexo(UPDATED_SEXO)
+            .email(UPDATED_EMAIL)
+            .dataNascimento(UPDATED_DATA_NASCIMENTO)
+            .naturalidade(UPDATED_NATURALIDADE)
+            .nacionalidade(UPDATED_NACIONALIDADE)
+            .cpf(UPDATED_CPF);
+
+        restPessoaMockMvc
+            .perform(
+                patch(ENTITY_API_URL_ID, partialUpdatedPessoa.getId())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(partialUpdatedPessoa))
+            )
+            .andExpect(status().isOk());
+
+        // Validate the Pessoa in the database
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        assertThat(pessoaList).hasSize(databaseSizeBeforeUpdate);
+        Pessoa testPessoa = pessoaList.get(pessoaList.size() - 1);
+        assertThat(testPessoa.getNome()).isEqualTo(UPDATED_NOME);
+        assertThat(testPessoa.getSexo()).isEqualTo(UPDATED_SEXO);
+        assertThat(testPessoa.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testPessoa.getDataNascimento()).isEqualTo(UPDATED_DATA_NASCIMENTO);
+        assertThat(testPessoa.getNaturalidade()).isEqualTo(UPDATED_NATURALIDADE);
+        assertThat(testPessoa.getNacionalidade()).isEqualTo(UPDATED_NACIONALIDADE);
+        assertThat(testPessoa.getCpf()).isEqualTo(UPDATED_CPF);
+    }
+
+    @Test
+    @Transactional
+    void patchNonExistingPessoa() throws Exception {
+        int databaseSizeBeforeUpdate = pessoaRepository.findAll().size();
+        pessoa.setId(count.incrementAndGet());
+
+        // Create the Pessoa
+        PessoaDTO pessoaDTO = pessoaMapper.toDto(pessoa);
+
+        // If the entity doesn't have an ID, it will throw BadRequestAlertException
+        restPessoaMockMvc
+            .perform(
+                patch(ENTITY_API_URL_ID, pessoaDTO.getId())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(pessoaDTO))
+            )
+            .andExpect(status().isBadRequest());
+
+        // Validate the Pessoa in the database
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        assertThat(pessoaList).hasSize(databaseSizeBeforeUpdate);
+    }
+
+    @Test
+    @Transactional
+    void patchWithIdMismatchPessoa() throws Exception {
+        int databaseSizeBeforeUpdate = pessoaRepository.findAll().size();
+        pessoa.setId(count.incrementAndGet());
+
+        // Create the Pessoa
+        PessoaDTO pessoaDTO = pessoaMapper.toDto(pessoa);
+
+        // If url ID doesn't match entity ID, it will throw BadRequestAlertException
+        restPessoaMockMvc
+            .perform(
+                patch(ENTITY_API_URL_ID, count.incrementAndGet())
+                    .contentType("application/merge-patch+json")
+                    .content(TestUtil.convertObjectToJsonBytes(pessoaDTO))
+            )
+            .andExpect(status().isBadRequest());
+
+        // Validate the Pessoa in the database
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        assertThat(pessoaList).hasSize(databaseSizeBeforeUpdate);
+    }
+
+    @Test
+    @Transactional
+    void patchWithMissingIdPathParamPessoa() throws Exception {
+        int databaseSizeBeforeUpdate = pessoaRepository.findAll().size();
+        pessoa.setId(count.incrementAndGet());
+
+        // Create the Pessoa
+        PessoaDTO pessoaDTO = pessoaMapper.toDto(pessoa);
+
+        // If url ID doesn't match entity ID, it will throw BadRequestAlertException
+        restPessoaMockMvc
+            .perform(
+                patch(ENTITY_API_URL).contentType("application/merge-patch+json").content(TestUtil.convertObjectToJsonBytes(pessoaDTO))
+            )
+            .andExpect(status().isMethodNotAllowed());
+
+        // Validate the Pessoa in the database
+        List<Pessoa> pessoaList = pessoaRepository.findAll();
+        assertThat(pessoaList).hasSize(databaseSizeBeforeUpdate);
+    }
+
+    @Test
+    @Transactional
     void deletePessoa() throws Exception {
         // Initialize the database
         pessoaRepository.saveAndFlush(pessoa);
@@ -404,7 +554,6 @@ class PessoaResourceIT {
             .andExpect(content().string("1"));
     }
 
-
     @Test
     @Transactional
     void verifyCPFNotUsed() throws Exception {
@@ -424,7 +573,6 @@ class PessoaResourceIT {
             .andExpect(content().string("0"));
     }
 
-
     @Test
     @Transactional
     void verifyCPFUsedByASamePessoa() throws Exception {
@@ -439,7 +587,9 @@ class PessoaResourceIT {
         assertThat(pessoaList).hasSize(databaseSizeBeforeCreate + 1);
         Pessoa testPessoa = pessoaList.get(pessoaList.size() - 1);
         restPessoaMockMvc
-            .perform(get(ENTITY_API_URL + "/cpf?" + "cpf=" + DEFAULT_CPF + "&id=" + testPessoa.getId()).contentType(MediaType.APPLICATION_JSON))
+            .perform(
+                get(ENTITY_API_URL + "/cpf?" + "cpf=" + DEFAULT_CPF + "&id=" + testPessoa.getId()).contentType(MediaType.APPLICATION_JSON)
+            )
             .andExpect(status().isOk())
             .andExpect(content().string("0"));
     }

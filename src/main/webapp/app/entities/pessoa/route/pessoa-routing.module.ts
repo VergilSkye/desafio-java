@@ -6,13 +6,14 @@ import { PessoaComponent } from '../list/pessoa.component';
 import { PessoaDetailComponent } from '../detail/pessoa-detail.component';
 import { PessoaUpdateComponent } from '../update/pessoa-update.component';
 import { PessoaRoutingResolveService } from './pessoa-routing-resolve.service';
+import { ASC } from 'app/config/navigation.constants';
 
 const pessoaRoute: Routes = [
   {
     path: '',
     component: PessoaComponent,
     data: {
-      defaultSort: 'id,asc',
+      defaultSort: 'id,' + ASC,
     },
     canActivate: [UserRouteAccessService],
   },

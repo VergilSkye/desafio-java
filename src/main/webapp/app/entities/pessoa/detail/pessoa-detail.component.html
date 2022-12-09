@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div class="d-flex justify-content-center">
   <div class="col-8">
     <div *ngIf="pessoa">
       <h2 data-cy="pessoaDetailsHeading"><span jhiTranslate="pessoaApp.pessoa.detail.title">Pessoa</span></h2>
@@ -10,7 +10,7 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dt><span jhiTranslate="global.field.id">Código</span></dt>
         <dd>
           <span>{{ pessoa.id }}</span>
         </dd>
@@ -57,11 +57,11 @@
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Voltar</span>
       </button>
 
       <button type="button" [routerLink]="['/pessoa', pessoa.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
       </button>
     </div>
   </div>

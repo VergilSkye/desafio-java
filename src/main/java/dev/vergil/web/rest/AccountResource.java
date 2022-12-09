@@ -7,7 +7,6 @@ import dev.vergil.service.MailService;
 import dev.vergil.service.UserService;
 import dev.vergil.service.dto.AdminUserDTO;
 import dev.vergil.service.dto.PasswordChangeDTO;
-import dev.vergil.service.dto.UserDTO;
 import dev.vergil.web.rest.errors.*;
 import dev.vergil.web.rest.vm.KeyAndPasswordVM;
 import dev.vergil.web.rest.vm.ManagedUserVM;

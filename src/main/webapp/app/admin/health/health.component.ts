@@ -21,21 +21,20 @@ export class HealthComponent implements OnInit {
 
   getBadgeClass(statusState: HealthStatus): string {
     if (statusState === 'UP') {
-      return 'badge-success';
-    } else {
-      return 'badge-danger';
+      return 'bg-success';
     }
+    return 'bg-danger';
   }
 
   refresh(): void {
-    this.healthService.checkHealth().subscribe(
-      health => (this.health = health),
-      (error: HttpErrorResponse) => {
+    this.healthService.checkHealth().subscribe({
+      next: health => (this.health = health),
+      error: (error: HttpErrorResponse) => {
         if (error.status === 503) {
           this.health = error.error;
         }
-      }
-    );
+      },
+    });
   }
 
   showHealth(health: { key: string; value: HealthDetails }): void {

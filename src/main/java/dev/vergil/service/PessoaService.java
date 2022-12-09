@@ -44,6 +44,39 @@ public class PessoaService {
     }
 
     /**
+     * Update a pessoa.
+     *
+     * @param pessoaDTO the entity to save.
+     * @return the persisted entity.
+     */
+    public PessoaDTO update(PessoaDTO pessoaDTO) {
+        log.debug("Request to update Pessoa : {}", pessoaDTO);
+        Pessoa pessoa = pessoaMapper.toEntity(pessoaDTO);
+        pessoa = pessoaRepository.save(pessoa);
+        return pessoaMapper.toDto(pessoa);
+    }
+
+    /**
+     * Partially update a pessoa.
+     *
+     * @param pessoaDTO the entity to update partially.
+     * @return the persisted entity.
+     */
+    public Optional<PessoaDTO> partialUpdate(PessoaDTO pessoaDTO) {
+        log.debug("Request to partially update Pessoa : {}", pessoaDTO);
+
+        return pessoaRepository
+            .findById(pessoaDTO.getId())
+            .map(existingPessoa -> {
+                pessoaMapper.partialUpdate(existingPessoa, pessoaDTO);
+
+                return existingPessoa;
+            })
+            .map(pessoaRepository::save)
+            .map(pessoaMapper::toDto);
+    }
+
+    /**
      * Get all the pessoas.
      *
      * @param pageable the pagination information.

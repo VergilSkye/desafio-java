@@ -99,7 +99,8 @@
       "edit": "Edit",
       "open": "Open",
       "save": "Save",
-      "view": "View"
+      "view": "View",
+      "show": "Show {{otherEntity}}"
     },
     "detail": {
       "field": "Field",
@@ -122,6 +123,11 @@
       "patternLogin": "This field can only contain letters, digits and e-mail addresses.",
       "cpfdigit": "CPF digit is invalid",
       "cpfAlreadyInUse": "CPF is already in use by someone else"
+    },
+    "filters": {
+      "set": "Following filters are set",
+      "clear": "Clear filter",
+      "clearAll": "Clear all filters"
     }
   },
   "error": {

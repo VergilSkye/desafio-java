@@ -9,14 +9,12 @@ describe('ItemCountComponent test', () => {
   let comp: ItemCountComponent;
   let fixture: ComponentFixture<ItemCountComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [TranslateModule.forRoot()],
-        declarations: [ItemCountComponent, TranslateDirective],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot()],
+      declarations: [ItemCountComponent, TranslateDirective],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemCountComponent);
@@ -28,6 +26,15 @@ describe('ItemCountComponent test', () => {
       expect(comp.first).toBeUndefined();
       expect(comp.second).toBeUndefined();
       expect(comp.total).toBeUndefined();
+    });
+
+    it('should set calculated numbers to undefined if the page value is not yet defined', () => {
+      // GIVEN
+      comp.params = { page: undefined, totalItems: 0, itemsPerPage: 10 };
+
+      // THEN
+      expect(comp.first).toBeUndefined();
+      expect(comp.second).toBeUndefined();
     });
 
     it('should change the content on page change', () => {
@@ -46,6 +53,16 @@ describe('ItemCountComponent test', () => {
       expect(comp.first).toBe(11);
       expect(comp.second).toBe(20);
       expect(comp.total).toBe(100);
+    });
+
+    it('should set the second number to totalItems if this is the last page which contains less than itemsPerPage items', () => {
+      // GIVEN
+      comp.params = { page: 2, totalItems: 16, itemsPerPage: 10 };
+
+      // THEN
+      expect(comp.first).toBe(11);
+      expect(comp.second).toBe(16);
+      expect(comp.total).toBe(16);
     });
   });
 });

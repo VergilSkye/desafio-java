@@ -1,25 +1,24 @@
 <form *ngIf="pessoa" name="deleteForm" (ngSubmit)="confirmDelete(pessoa.id!)">
   <div class="modal-header">
-    <h4 class="modal-title" data-cy="pessoaDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+    <h4 class="modal-title" data-cy="pessoaDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirme a exclusão</h4>
 
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
   </div>
 
   <div class="modal-body">
     <jhi-alert-error></jhi-alert-error>
-
     <p id="jhi-delete-pessoa-heading" jhiTranslate="pessoaApp.pessoa.delete.question" [translateValues]="{ id: pessoa.id }">
-      Are you sure you want to delete this Pessoa?
+      Tem certeza de que deseja excluir Pessoa {{ pessoa.id }}?
     </p>
   </div>
 
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
-      <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
     </button>
 
     <button id="jhi-confirm-delete-pessoa" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
-      <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+      <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Excluir</span>
     </button>
   </div>
 </form>

@@ -27,18 +27,15 @@ export class ParseLinks {
         throw new Error('section could not be split on ";"');
       }
 
-      const url: string = section[0].replace(/<(.*)>/, '$1').trim();
+      const url: string = section[0].replace(/<(.*)>/, '$1').trim(); // NOSONAR
       const queryString: { [key: string]: string | undefined } = {};
 
-      url.replace(
-        new RegExp('([^?=&]+)(=([^&]*))?', 'g'),
-        ($0: string, $1: string | undefined, $2: string | undefined, $3: string | undefined) => {
-          if ($1 !== undefined) {
-            queryString[$1] = $3;
-          }
-          return $3 ?? '';
+      url.replace(/([^?=&]+)(=([^&]*))?/g, (_$0: string, $1: string | undefined, _$2: string | undefined, $3: string | undefined) => {
+        if ($1 !== undefined) {
+          queryString[$1] = $3;
         }
-      );
+        return $3 ?? '';
+      });
 
       if (queryString.page !== undefined) {
         const name: string = section[1].replace(/rel="(.*)"/, '$1').trim();

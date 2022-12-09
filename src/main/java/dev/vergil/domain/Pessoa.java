@@ -15,13 +15,15 @@ import org.hibernate.validator.constraints.br.CPF;
 @Entity
 @Table(name = "pessoa")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Pessoa extends AbstractAuditingEntity implements Serializable {
+@SuppressWarnings("common-java:DuplicatedBlocks")
+public class Pessoa extends AbstractAuditingEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id")
     private Long id;
 
     /**
@@ -70,17 +72,18 @@ public class Pessoa extends AbstractAuditingEntity implements Serializable {
     private String cpf;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
-        return id;
+        return this.id;
+    }
+
+    public Pessoa id(Long id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Pessoa id(Long id) {
-        this.id = id;
-        return this;
     }
 
     public String getNome() {
@@ -88,7 +91,7 @@ public class Pessoa extends AbstractAuditingEntity implements Serializable {
     }
 
     public Pessoa nome(String nome) {
-        this.nome = nome;
+        this.setNome(nome);
         return this;
     }
 
@@ -101,7 +104,7 @@ public class Pessoa extends AbstractAuditingEntity implements Serializable {
     }
 
     public Pessoa sexo(TipoSexo sexo) {
-        this.sexo = sexo;
+        this.setSexo(sexo);
         return this;
     }
 
@@ -114,7 +117,7 @@ public class Pessoa extends AbstractAuditingEntity implements Serializable {
     }
 
     public Pessoa email(String email) {
-        this.email = email;
+        this.setEmail(email);
         return this;
     }
 
@@ -127,7 +130,7 @@ public class Pessoa extends AbstractAuditingEntity implements Serializable {
     }
 
     public Pessoa dataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+        this.setDataNascimento(dataNascimento);
         return this;
     }
 
@@ -140,7 +143,7 @@ public class Pessoa extends AbstractAuditingEntity implements Serializable {
     }
 
     public Pessoa naturalidade(String naturalidade) {
-        this.naturalidade = naturalidade;
+        this.setNaturalidade(naturalidade);
         return this;
     }
 
@@ -153,7 +156,7 @@ public class Pessoa extends AbstractAuditingEntity implements Serializable {
     }
 
     public Pessoa nacionalidade(String nacionalidade) {
-        this.nacionalidade = nacionalidade;
+        this.setNacionalidade(nacionalidade);
         return this;
     }
 
@@ -166,7 +169,7 @@ public class Pessoa extends AbstractAuditingEntity implements Serializable {
     }
 
     public Pessoa cpf(String cpf) {
-        this.cpf = cpf;
+        this.setCpf(cpf);
         return this;
     }
 

@@ -99,7 +99,8 @@
       "edit": "Editar",
       "open": "Abrir",
       "save": "Salvar",
-      "view": "Visualizar"
+      "view": "Visualizar",
+      "show": "Mostrar {{otherEntity}}"
     },
     "detail": {
       "field": "Campo",
@@ -122,6 +123,11 @@
       "patternLogin": "Este campo só pode conter letras, números e e-mail.",
       "cpfdigit": "O dígito CPF é inválido ",
       "cpfAlreadyInUse": "CPF já está sendo utilizado por outra pessoa"
+    },
+    "filters": {
+      "set": "Filtros aplicados",
+      "clear": "Limpar filtro",
+      "clearAll": "Limpar todos filtros"
     }
   },
   "error": {

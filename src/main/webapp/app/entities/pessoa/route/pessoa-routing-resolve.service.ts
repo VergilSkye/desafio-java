@@ -4,18 +4,18 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of, EMPTY } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IPessoa, Pessoa } from '../pessoa.model';
+import { IPessoa } from '../pessoa.model';
 import { PessoaService } from '../service/pessoa.service';
 
 @Injectable({ providedIn: 'root' })
-export class PessoaRoutingResolveService implements Resolve<IPessoa> {
+export class PessoaRoutingResolveService implements Resolve<IPessoa | null> {
   constructor(protected service: PessoaService, protected router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IPessoa> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IPessoa | null | never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        mergeMap((pessoa: HttpResponse<Pessoa>) => {
+        mergeMap((pessoa: HttpResponse<IPessoa>) => {
           if (pessoa.body) {
             return of(pessoa.body);
           } else {
@@ -25,6 +25,6 @@ export class PessoaRoutingResolveService implements Resolve<IPessoa> {
         })
       );
     }
-    return of(new Pessoa());
+    return of(null);
   }
 }

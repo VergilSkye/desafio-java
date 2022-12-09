@@ -1,0 +1,10 @@
+{
+  "pessoaApp": {
+    "TipoSexo": {
+      "null": "",
+      "MASCULINO": "MASCULINO",
+      "FEMININO": "FEMININO",
+      "OUTROS": "OUTROS"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Pessoa",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "javadoc": "Nome obrigatorio",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sexo",
+      "fieldType": "TipoSexo",
+      "javadoc": "Sexo enum com tres opcoes, Masculino, Feminino, Outros",
+      "fieldValues": "MASCULINO,FEMININO,OUTROS"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "javadoc": "Email nao obrigatorio"
+    },
+    {
+      "fieldName": "dataNascimento",
+      "fieldType": "LocalDate",
+      "javadoc": "Data de nascimento obrigatoria",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "naturalidade",
+      "fieldType": "String",
+      "javadoc": "Naturalidade não obrigatória"
+    },
+    {
+      "fieldName": "nacionalidade",
+      "fieldType": "String",
+      "javadoc": "Nacionalidade não obrigatória"
+    },
+    {
+      "fieldName": "cpf",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "relationships": [],
+  "javadoc": "The Pessoa entity.\\n@author Virgílio Stefanin",
+  "entityTableName": "pessoa",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210326114935"
+}

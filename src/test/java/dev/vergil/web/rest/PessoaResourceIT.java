@@ -90,7 +90,6 @@ class PessoaResourceIT {
             .naturalidade(DEFAULT_NATURALIDADE)
             .nacionalidade(DEFAULT_NACIONALIDADE)
             .cpf(DEFAULT_CPF);
-        return pessoa;
     }
 
     /**

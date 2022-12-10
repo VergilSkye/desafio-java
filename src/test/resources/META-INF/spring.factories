@@ -1,1 +1,0 @@
-org.springframework.test.context.ContextCustomizerFactory = dev.vergil.config.TestContainersSpringContextCustomizerFactory

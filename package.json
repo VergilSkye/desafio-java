@@ -36,6 +36,7 @@
     "docker:others:up": "",
     "java:docker": "./mvnw -ntp verify -DskipTests -Pprod jib:dockerBuild",
     "java:docker:arm64": "npm run java:docker -- -Djib-maven-plugin.architecture=arm64",
+    "java:docker:deploy:image": "./mvnw -ntp verify -DskipTests jib:build -Djib.to.auth.username=$REGISTRY_USER -Djib.to.auth.password=$REGISTRY_PASSWORD -X",
     "java:docker:dev": "npm run java:docker -- -Pdev,webapp",
     "java:docker:prod": "npm run java:docker -- -Pprod",
     "java:jar": "./mvnw -ntp verify -DskipTests --batch-mode",

@@ -1,35 +1,56 @@
 const webpack = require('webpack');
+const { merge } = require('webpack-merge');
 const path = require('path');
+const { hashElement } = require('folder-hash');
 const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
-const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const WebpackNotifierPlugin = require('webpack-notifier');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-const tls = process.env.TLS;
+const environment = require('./environment');
+const proxyConfig = require('./proxy.conf');
 
-module.exports = (config, options) => {
+module.exports = async (config, options, targetOptions) => {
+  const languagesHash = await hashElement(path.resolve(__dirname, '../src/main/webapp/i18n'), {
+    algo: 'md5',
+    encoding: 'hex',
+    files: { include: ['*.json'] },
+  });
+
   // PLUGINS
   if (config.mode === 'development') {
     config.plugins.push(
       new ESLintPlugin({
-        extensions: ['js', 'ts'],
+        baseConfig: {
+          parserOptions: {
+            project: ['../tsconfig.app.json'],
+          },
+        },
       }),
-      new FriendlyErrorsWebpackPlugin(),
       new WebpackNotifierPlugin({
         title: 'Pessoa',
         contentImage: path.join(__dirname, 'logo-jhipster.png'),
-      }),
+      })
+    );
+  }
+
+  // configuring proxy for back end service
+  const tls = Boolean(config.devServer && config.devServer.https);
+  if (config.devServer) {
+    config.devServer.proxy = proxyConfig({ tls });
+  }
+
+  if (targetOptions.target === 'serve' || config.watch) {
+    config.plugins.push(
       new BrowserSyncPlugin(
         {
           host: 'localhost',
           port: 9000,
           https: tls,
           proxy: {
-            target: `http${tls ? 's' : ''}://localhost:4200`,
+            target: `http${tls ? 's' : ''}://localhost:${targetOptions.target === 'serve' ? '4200' : '8080'}`,
             ws: true,
             proxyOptions: {
               changeOrigin: false, //pass the Host header to the backend unchanged  https://github.com/Browsersync/browser-sync/issues/430
@@ -50,18 +71,10 @@ module.exports = (config, options) => {
           */
         },
         {
-          reload: false,
+          reload: targetOptions.target === 'build', // enabled for build --watch
         }
       )
     );
-
-    if (!process.env.JHI_DISABLE_WEBPACK_LOGS) {
-      config.plugins.push(
-        new SimpleProgressWebpackPlugin({
-          format: 'compact',
-        })
-      );
-    }
   }
 
   if (config.mode === 'production') {
@@ -71,15 +84,23 @@ module.exports = (config, options) => {
         openAnalyzer: false,
         // Webpack statistics in target folder
         reportFilename: '../stats.html',
-      }),
-      new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false,
       })
     );
   }
 
   const patterns = [
+    {
+      // https://github.com/swagger-api/swagger-ui/blob/v4.6.1/swagger-ui-dist-package/README.md
+      context: require('swagger-ui-dist').getAbsoluteFSPath(),
+      from: '*.{js,css,html,png}',
+      to: 'swagger-ui/',
+      globOptions: { ignore: ['**/index.html'] },
+    },
+    {
+      from: require.resolve('axios/dist/axios.min.js'),
+      to: 'swagger-ui/',
+    },
+    { from: './src/main/webapp/swagger-ui/', to: 'swagger-ui/' },
     // jhipster-needle-add-assets-to-webpack - JHipster will add/remove third-party resources in this array
   ];
 
@@ -89,17 +110,15 @@ module.exports = (config, options) => {
 
   config.plugins.push(
     new webpack.DefinePlugin({
-      'process.env': {
-        BUILD_TIMESTAMP: `'${new Date().getTime()}'`,
-        // APP_VERSION is passed as an environment variable from the Gradle / Maven build tasks.
-        VERSION: `'${process.env.hasOwnProperty('APP_VERSION') ? process.env.APP_VERSION : 'DEV'}'`,
-        DEBUG_INFO_ENABLED: config.mode === 'development',
-        // The root URL for API calls, ending with a '/' - for example: `"https://www.jhipster.tech:8081/myservice/"`.
-        // If this URL is left empty (""), then it will be relative to the current context.
-        // If you use an API server, in `prod` mode, you will need to enable CORS
-        // (see the `jhipster.cors` common JHipster property in the `application-*.yml` configurations)
-        SERVER_API_URL: `''`,
-      },
+      I18N_HASH: JSON.stringify(languagesHash.hash),
+      // APP_VERSION is passed as an environment variable from the Gradle / Maven build tasks.
+      __VERSION__: JSON.stringify(environment.__VERSION__),
+      __DEBUG_INFO_ENABLED__: environment.__DEBUG_INFO_ENABLED__ || config.mode === 'development',
+      // The root URL for API calls, ending with a '/' - for example: `"https://www.jhipster.tech:8081/myservice/"`.
+      // If this URL is left empty (""), then it will be relative to the current context.
+      // If you use an API server, in `prod` mode, you will need to enable CORS
+      // (see the `jhipster.cors` common JHipster property in the `application-*.yml` configurations)
+      SERVER_API_URL: JSON.stringify(environment.SERVER_API_URL),
     }),
     new MergeJsonWebpackPlugin({
       output: {
@@ -110,6 +129,11 @@ module.exports = (config, options) => {
         ],
       },
     })
+  );
+
+  config = merge(
+    config
+    // jhipster-needle-add-webpack-config - JHipster will add custom config
   );
 
   return config;

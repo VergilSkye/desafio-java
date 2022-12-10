@@ -95,11 +95,47 @@ public class PessoaResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        PessoaDTO result = pessoaService.save(pessoaDTO);
+        PessoaDTO result = pessoaService.update(pessoaDTO);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, pessoaDTO.getId().toString()))
             .body(result);
+    }
+
+    /**
+     * {@code PATCH  /pessoas/:id} : Partial updates given fields of an existing pessoa, field will ignore if it is null
+     *
+     * @param id the id of the pessoaDTO to save.
+     * @param pessoaDTO the pessoaDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated pessoaDTO,
+     * or with status {@code 400 (Bad Request)} if the pessoaDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the pessoaDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the pessoaDTO couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PatchMapping(value = "/pessoas/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    public ResponseEntity<PessoaDTO> partialUpdatePessoa(
+        @PathVariable(value = "id", required = false) final Long id,
+        @NotNull @RequestBody PessoaDTO pessoaDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to partial update Pessoa partially : {}, {}", id, pessoaDTO);
+        if (pessoaDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, pessoaDTO.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
+        if (!pessoaRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        Optional<PessoaDTO> result = pessoaService.partialUpdate(pessoaDTO);
+
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, pessoaDTO.getId().toString())
+        );
     }
 
     /**
@@ -109,7 +145,7 @@ public class PessoaResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pessoas in body.
      */
     @GetMapping("/pessoas")
-    public ResponseEntity<List<PessoaDTO>> getAllPessoas(Pageable pageable) {
+    public ResponseEntity<List<PessoaDTO>> getAllPessoas(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of Pessoas");
         Page<PessoaDTO> page = pessoaService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);

@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
 import { Subscription, ReplaySubject, Subject } from 'rxjs';
 
-import * as SockJS from 'sockjs-client';
-import * as Stomp from 'webstomp-client';
+import SockJS from 'sockjs-client';
+import Stomp, { Client, Subscription as StompSubscription, ConnectionHeaders, Message } from 'webstomp-client';
 
 import { AuthServerProvider } from 'app/core/auth/auth-jwt.service';
 import { MessageActivity } from './message-activity.model';
+import { TrackerActivity } from '../../core/tracker/tracker-activity.model';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
-  private stompClient: Stomp.Client | null = null;
+  private stompClient: Client | null = null;
   private connectionSubject: ReplaySubject<void> = new ReplaySubject(1);
   private connectionSubscription: Subscription | null = null;
-  private stompSubscription: Stomp.Subscription | null = null;
+  private stompSubscription: StompSubscription | null = null;
   private listenerSubject: Subject<MessageActivity> = new Subject();
 
   constructor(private authServerProvider: AuthServerProvider, private location: Location) {}
@@ -32,7 +33,7 @@ export class ChatService {
     }
     const socket: WebSocket = new SockJS(url);
     this.stompClient = Stomp.over(socket, { protocols: ['v12.stomp'] });
-    const headers: Stomp.ConnectionHeaders = {};
+    const headers: ConnectionHeaders = {};
     this.stompClient.connect(headers, () => {
       this.connectionSubject.next();
       this.subscribe();
@@ -63,7 +64,7 @@ export class ChatService {
 
     this.connectionSubscription = this.connectionSubject.subscribe(() => {
       if (this.stompClient) {
-        this.stompSubscription = this.stompClient.subscribe('/topic/chat', (data: Stomp.Message) => {
+        this.stompSubscription = this.stompClient.subscribe('/topic/chat', (data: Message) => {
           this.listenerSubject.next(JSON.parse(data.body));
         });
       }

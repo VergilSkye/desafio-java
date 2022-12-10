@@ -13,14 +13,12 @@ describe('TranslateDirective Tests', () => {
   let fixture: ComponentFixture<TestTranslateDirectiveComponent>;
   let translateService: TranslateService;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [TranslateModule.forRoot()],
-        declarations: [TranslateDirective, TestTranslateDirectiveComponent],
-      });
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TranslateModule.forRoot()],
+      declarations: [TranslateDirective, TestTranslateDirectiveComponent],
+    });
+  }));
 
   beforeEach(() => {
     translateService = TestBed.inject(TranslateService);
@@ -28,7 +26,7 @@ describe('TranslateDirective Tests', () => {
   });
 
   it('should change HTML', () => {
-    const spy = spyOn(translateService, 'get').and.callThrough();
+    const spy = jest.spyOn(translateService, 'get');
 
     fixture.detectChanges();
 

@@ -2,8 +2,7 @@ package dev.vergil.service.dto;
 
 import dev.vergil.domain.AbstractAuditingEntity;
 import dev.vergil.domain.enumeration.TipoSexo;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -13,7 +12,8 @@ import org.hibernate.validator.constraints.br.CPF;
 /**
  * A DTO for the {@link dev.vergil.domain.Pessoa} entity.
  */
-@ApiModel(description = "The Pessoa entity.\n@author Virgílio Stefanin")
+@Schema(description = "The Pessoa entity.\n@author Virgílio Stefanin")
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class PessoaDTO extends AbstractAuditingEntity implements Serializable {
 
     private Long id;
@@ -22,38 +22,38 @@ public class PessoaDTO extends AbstractAuditingEntity implements Serializable {
      * Nome obrigatorio
      */
     @NotNull
-    @ApiModelProperty(value = "Nome obrigatorio", required = true)
+    @Schema(description = "Nome obrigatorio", required = true)
     private String nome;
 
     /**
      * Sexo enum com tres opcoes, Masculino, Feminino, Outros
      */
-    @ApiModelProperty(value = "Sexo enum com tres opcoes, Masculino, Feminino, Outros")
+    @Schema(description = "Sexo enum com tres opcoes, Masculino, Feminino, Outros")
     private TipoSexo sexo;
 
     /**
      * Email nao obrigatorio
      */
-    @ApiModelProperty(value = "Email nao obrigatorio")
+    @Schema(description = "Email nao obrigatorio")
     private String email;
 
     /**
      * Data de nascimento obrigatoria
      */
     @NotNull
-    @ApiModelProperty(value = "Data de nascimento obrigatoria", required = true)
+    @Schema(description = "Data de nascimento obrigatoria", required = true)
     private LocalDate dataNascimento;
 
     /**
      * Naturalidade não obrigatória
      */
-    @ApiModelProperty(value = "Naturalidade não obrigatória")
+    @Schema(description = "Naturalidade não obrigatória")
     private String naturalidade;
 
     /**
      * Nacionalidade não obrigatória
      */
-    @ApiModelProperty(value = "Nacionalidade não obrigatória")
+    @Schema(description = "Nacionalidade não obrigatória")
     private String nacionalidade;
 
     @CPF

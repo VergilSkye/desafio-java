@@ -5,6 +5,7 @@ import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
+import { ASC, DESC, SORT } from 'app/config/navigation.constants';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { UserManagementService } from '../service/user-management.service';
@@ -42,7 +43,7 @@ export class UserManagementComponent implements OnInit {
     this.userService.update({ ...user, activated: isActivated }).subscribe(() => this.loadAll());
   }
 
-  trackIdentity(index: number, item: User): number {
+  trackIdentity(_index: number, item: User): number {
     return item.id!;
   }
 
@@ -65,13 +66,13 @@ export class UserManagementComponent implements OnInit {
         size: this.itemsPerPage,
         sort: this.sort(),
       })
-      .subscribe(
-        (res: HttpResponse<User[]>) => {
+      .subscribe({
+        next: (res: HttpResponse<User[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers);
         },
-        () => (this.isLoading = false)
-      );
+        error: () => (this.isLoading = false),
+      });
   }
 
   transition(): void {
@@ -79,7 +80,7 @@ export class UserManagementComponent implements OnInit {
       relativeTo: this.activatedRoute.parent,
       queryParams: {
         page: this.page,
-        sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc'),
+        sort: `${this.predicate},${this.ascending ? ASC : DESC}`,
       },
     });
   }
@@ -87,16 +88,16 @@ export class UserManagementComponent implements OnInit {
   private handleNavigation(): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
       const page = params.get('page');
-      this.page = page !== null ? +page : 1;
-      const sort = (params.get('sort') ?? data['defaultSort']).split(',');
+      this.page = +(page ?? 1);
+      const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
       this.predicate = sort[0];
-      this.ascending = sort[1] === 'asc';
+      this.ascending = sort[1] === ASC;
       this.loadAll();
     });
   }
 
   private sort(): string[] {
-    const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
+    const result = [`${this.predicate},${this.ascending ? ASC : DESC}`];
     if (this.predicate !== 'id') {
       result.push('id');
     }

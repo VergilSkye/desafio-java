@@ -1,17 +1,21 @@
 {
-  "name": "Pessoa",
+  "applications": "*",
+  "changelogDate": "20210326114935",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "pessoa",
   "fields": [
     {
       "fieldName": "nome",
       "fieldType": "String",
-      "javadoc": "Nome obrigatorio",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": ["required"],
+      "javadoc": "Nome obrigatorio"
     },
     {
       "fieldName": "sexo",
       "fieldType": "TipoSexo",
-      "javadoc": "Sexo enum com tres opcoes, Masculino, Feminino, Outros",
-      "fieldValues": "MASCULINO,FEMININO,OUTROS"
+      "fieldValues": "MASCULINO,FEMININO,OUTROS",
+      "javadoc": "Sexo enum com tres opcoes, Masculino, Feminino, Outros"
     },
     {
       "fieldName": "email",
@@ -21,8 +25,8 @@
     {
       "fieldName": "dataNascimento",
       "fieldType": "LocalDate",
-      "javadoc": "Data de nascimento obrigatoria",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": ["required"],
+      "javadoc": "Data de nascimento obrigatoria"
     },
     {
       "fieldName": "naturalidade",
@@ -40,16 +44,12 @@
       "fieldValidateRules": ["required", "unique"]
     }
   ],
-  "relationships": [],
-  "javadoc": "The Pessoa entity.\\n@author Virgílio Stefanin",
-  "entityTableName": "pessoa",
-  "dto": "mapstruct",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
   "fluentMethods": true,
+  "javadoc": "The Pessoa entity.\\n@author Virgílio Stefanin",
+  "jpaMetamodelFiltering": false,
+  "name": "Pessoa",
+  "pagination": "pagination",
   "readOnly": false,
-  "embedded": false,
-  "applications": "*",
-  "changelogDate": "20210326114935"
+  "relationships": [],
+  "service": "serviceClass"
 }

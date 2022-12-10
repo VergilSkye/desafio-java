@@ -68,9 +68,11 @@ export class CustomCPFCNPJValidatorService {
    *
    * @param pessoaService
    * Test if cpf is already in use by another person
+   * @param pessoaId
+   * Nullable id for a specif pessoa
    */
 
-  existingCpfValidator(pessoaService: PessoaService, pessoaId: number): AsyncValidatorFn {
+  existingCpfValidator(pessoaService: PessoaService, pessoaId: number | null): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> =>
       pessoaService
         .findWithCpf(control.value, pessoaId)

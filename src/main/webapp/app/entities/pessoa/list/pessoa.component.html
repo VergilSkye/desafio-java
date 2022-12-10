@@ -3,9 +3,9 @@
     <span jhiTranslate="pessoaApp.pessoa.home.title">Pessoas</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="pessoaApp.pessoa.home.refreshListLabel">Refresh List</span>
+        <span jhiTranslate="pessoaApp.pessoa.home.refreshListLabel">Atualizar lista</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/pessoa/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="pessoaApp.pessoa.home.createLabel"> Create a new Pessoa </span>
+        <span jhiTranslate="pessoaApp.pessoa.home.createLabel"> Criar nova Pessoa </span>
       </button>
     </div>
   </h2>
@@ -25,32 +25,81 @@
   <jhi-alert></jhi-alert>
 
   <div class="alert alert-warning" id="no-result" *ngIf="pessoas?.length === 0">
-    <span jhiTranslate="pessoaApp.pessoa.home.notFound">No pessoas found</span>
+    <span jhiTranslate="pessoaApp.pessoa.home.notFound">Nenhum Pessoa encontrado</span>
   </div>
 
-  <div class="table-responsive" id="entities" *ngIf="pessoas && pessoas.length > 0">
+  <div class="table-responsive table-entities" id="entities" *ngIf="pessoas && pessoas.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="nome"><span jhiTranslate="pessoaApp.pessoa.nome">Nome</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="sexo"><span jhiTranslate="pessoaApp.pessoa.sexo">Sexo</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="email"><span jhiTranslate="pessoaApp.pessoa.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">Código</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nome">
+            <div class="d-flex">
+              <span jhiTranslate="pessoaApp.pessoa.nome">Nome</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sexo">
+            <div class="d-flex">
+              <span jhiTranslate="pessoaApp.pessoa.sexo">Sexo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span jhiTranslate="pessoaApp.pessoa.email">Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="dataNascimento">
-            <span jhiTranslate="pessoaApp.pessoa.dataNascimento">Data Nascimento</span> <fa-icon icon="sort"></fa-icon>
+            <div class="d-flex">
+              <span jhiTranslate="pessoaApp.pessoa.dataNascimento">Data Nascimento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
           </th>
           <th scope="col" jhiSortBy="naturalidade">
-            <span jhiTranslate="pessoaApp.pessoa.naturalidade">Naturalidade</span> <fa-icon icon="sort"></fa-icon>
+            <div class="d-flex">
+              <span jhiTranslate="pessoaApp.pessoa.naturalidade">Naturalidade</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
           </th>
           <th scope="col" jhiSortBy="nacionalidade">
-            <span jhiTranslate="pessoaApp.pessoa.nacionalidade">Nacionalidade</span> <fa-icon icon="sort"></fa-icon>
+            <div class="d-flex">
+              <span jhiTranslate="pessoaApp.pessoa.nacionalidade">Nacionalidade</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
           </th>
-          <th scope="col" jhiSortBy="cpf"><span jhiTranslate="pessoaApp.pessoa.CPF">CPF</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="cpf">
+            <div class="d-flex">
+              <span jhiTranslate="pessoaApp.pessoa.cpf">Cpf</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+
           <th scope="col" jhiSortBy="createdDate">
-            <span jhiTranslate="pessoaApp.pessoa.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon>
+            <div class="d-flex">
+              <span jhiTranslate="pessoaApp.pessoa.createdDate">Data de criação</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
           </th>
+
           <th scope="col" jhiSortBy="lastModifiedDate">
-            <span jhiTranslate="pessoaApp.pessoa.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
+            <div class="d-flex">
+              <span jhiTranslate="pessoaApp.pessoa.createdDate">Data de criação</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+
+          <th scope="col" jhiSortBy="lastModifiedDate">
+            <div class="d-flex">
+              <span jhiTranslate="pessoaApp.pessoa.lastModifiedDate">Data de última modificação</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
           </th>
           <th scope="col"></th>
         </tr>
@@ -63,7 +112,7 @@
           <td>{{ pessoa.nome }}</td>
           <td jhiTranslate="{{ 'pessoaApp.TipoSexo.' + pessoa.sexo }}">{{ pessoa.sexo }}</td>
           <td>{{ pessoa.email }}</td>
-          <td>{{ pessoa.dataNascimento | brazilDate }}</td>
+          <td>{{ pessoa.dataNascimento | formatMediumDate }}</td>
           <td>{{ pessoa.naturalidade }}</td>
           <td>{{ pessoa.nacionalidade }}</td>
           <td>{{ pessoa.cpf! | mask: '000.000.000-00' }}</td>
@@ -73,12 +122,12 @@
             <div class="btn-group">
               <button type="submit" [routerLink]="['/pessoa', pessoa.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
               </button>
 
               <button type="submit" (click)="delete(pessoa)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Excluir</span>
               </button>
             </div>
           </td>
@@ -88,19 +137,19 @@
   </div>
 
   <div *ngIf="pessoas && pessoas.length > 0">
-    <div class="row justify-content-center">
+    <div class="d-flex justify-content-center">
       <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="d-flex justify-content-center">
       <ngb-pagination
         [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
+        [page]="page"
         [pageSize]="itemsPerPage"
         [maxSize]="5"
         [rotate]="true"
         [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
+        (pageChange)="navigateToPage($event)"
       ></ngb-pagination>
     </div>
   </div>

@@ -16,7 +16,6 @@ spring:
       auto-commit: false
       maximum-pool-size: 1
   jpa:
-    database-platform: tech.jhipster.domain.util.FixedPostgreSQL10Dialect
     open-in-view: false
     hibernate:
       ddl-auto: none
